@@ -1,10 +1,10 @@
 # PyCraft
 
 
-    | Task  | Not Started | In Progress   | Finished |
+    | Task          | Not Started | In Progress | Finished |
 
---- | --- | --- | --- |--- |--- |--- |--- |--- |--- |--- |---
+    | ------------- |:---:| ---:| ---:|
 
-    | Main Menu | [ ] | [ ] | - [x]
+    | Main Menu     | [ ] | [ ] | [x]
 
-    | Loading Screen   | [ ]  |  | [ ] | [x] 
+    | Loading Screen| [ ] | [ ] | [x]
