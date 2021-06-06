@@ -9,5 +9,5 @@
 
 | Task           |  Not Started  | Doing | Done |
 | -------------- | :-----------: | ----: | ---: |
-| Main Menu      | right-aligned |  [ ]  | [ ]  |
-| Loading Screen |   centered    |  [ ]  | [ ]  |
+| Main Menu      | [ ] |  [ ]  | [ ]  |
+| Loading Screen |   [ ]    |  [ ]  | [ ]  |
