@@ -1,6 +1,9 @@
 import math
 from random import randint
 
+from pypresence import Presence
+import time
+
 import pyglet
 from pyglet.gl import GL_QUADS
 
@@ -32,6 +35,7 @@ class Inventory:
                                                     x=self.gl.WIDTH // 2, y=60)
 
     def initWindow(self):
+
         self.window = ModalWindow(self.gl)
         self.window.setWindow(self.gl.gui.GUI_TEXTURES["inventory_window"])
         self.window.clickEvent = self.windowClickEvent

@@ -1,6 +1,12 @@
+from game.blocks.CubeHandler import CubeHandler
 from game.blocks.droppedBlock import droppedBlock
 import math
 from random import randint
+
+from game.blocks.Cube import Cube
+
+from pypresence import Presence
+import time
 
 import pyglet
 from OpenGL.GL import *
@@ -58,6 +64,7 @@ class Player:
         else:
             if self.shift > 0:
                 self.shift -= 0.05
+
 
 
     def updatePosition(self):

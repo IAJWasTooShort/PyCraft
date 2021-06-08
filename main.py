@@ -8,6 +8,9 @@ import pyglet
 from OpenGL.GL import *
 from OpenGL.raw.GLU import gluOrtho2D
 
+from pypresence import Presence
+import time
+
 from sys import exit
 
 from game.GUI.Chat import *
@@ -24,12 +27,20 @@ from game.world.Biomes import getBiomeByTemp
 from game.world.worldGenerator import worldGenerator
 from settings import *
 
+import gc
 
-#pygame.display.
+gc.enable()
+#gc.set_debug(gc.DEBUG_LEAK)
+
 
 programIcon = pygame.image.load('textures/pycraft.png')
 
 pygame.display.set_icon(programIcon)
+
+client_id = "851879525590630411"
+RPC = Presence(client_id)
+RPC.connect()
+
 
 def respawn():
     pause()
@@ -87,7 +98,7 @@ def closeSettings():
 
 def closeIGSettings():
     global mainFunction
-    mainFunction = pause
+    mainFunction = pauseMenu
 
 
 def startNewGame():
@@ -255,6 +266,9 @@ def genWorld(mc):
         IN_MENU = False
         PAUSE = False
 
+    RPC.update(state="Loading World...", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
+
+
     proc = round((scene.worldGen.start - len(scene.worldGen.queue)) * 100 / chunkCnt)
     drawInfoLabel(scene, "Generating world", xx=scene.WIDTH // 2, yy=scene.HEIGHT // 2, style=[('', '')],
                   size=12, anchor_x='center')
@@ -270,6 +284,9 @@ def drawMainMenu(mc):
     glFogfv(GL_FOG_COLOR, (GLfloat * 4)(0.5, 0.7, 1, 1))
     glFogf(GL_FOG_START, 0)
     glFogf(GL_FOG_END, 1000)
+
+    RPC.update(state="On the Main Menu", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
+
 
     scene.set3d()
 
@@ -338,6 +355,8 @@ def drawMainMenu(mc):
 
 print("Loading the game...")
 
+RPC.update(state="Loading PyCraft...", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
+
 resizeEvent = False
 LAST_SAVED_RESOLUTION = [WIDTH, HEIGHT]
 
@@ -377,6 +396,9 @@ scene.initScene()
 
 print("Loading sounds...")
 sound.BLOCKS_SOUND["pickUp"] = pygame.mixer.Sound("sounds/pick.mp3")
+
+sound.BLOCKS_SOUND["fireburn"] = pygame.mixer.Sound("sounds/fire.ogg")
+sound.BLOCKS_SOUND["firecrack"] = pygame.mixer.Sound("sounds/fizz.ogg")
 
 print("Loading step sounds...")
 sound.BLOCKS_SOUND["step"] = {}
@@ -569,7 +591,7 @@ closeSettingsButton.setEvent(closeSettings)
 #
 
 # IGSettings objects
-closeIGSettingsButton = Button(scene, "Close", 0, 0)
+closeIGSettingsButton = Button(scene, "Back To Game", 0, 0)
 IGsoundVolumeSliderBox = Sliderbox(scene, "Sound volume:", 100, 0, 0)
 
 closeIGSettingsButton.setEvent(closeIGSettings)
@@ -581,7 +603,7 @@ optionsButton = Button(scene, "Options", 0, 0)
 quitWorldButton = Button(scene, "Quit to title", 0, 0)
 
 resumeButton.setEvent(pause)
-optionsButton.setEvent(showSettings)
+optionsButton.setEvent(showSettingsIG)
 quitWorldButton.setEvent(quitToMenu)
 #
 
@@ -599,6 +621,7 @@ mainMenuRotation = [50, 180, True]
 mainFunction = drawMainMenu
 
 while True:
+
     if scene.allowEvents["keyboardAndMouse"] and not PAUSE:
         if pygame.mouse.get_pressed(3)[0]:
             player.mouseEvent(1)

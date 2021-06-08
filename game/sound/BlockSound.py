@@ -51,6 +51,15 @@ class BlockSound:
         chnl = self.gl.sound.BLOCKS_SOUND["step"][blName][randint(0, bl - 1)].play()
         chnl.set_volume(self.gl.sound.volume)
 
+    def playFireBurnSound(self):
+        bl = len(self.gl.sound.BLOCKS_SOUND["fireburn"])
+        chnl = self.gl.sound.BLOCKS_SOUND["fireburn"][randint(0, bl - 1)].play()
+        chnl.set_volume(self.gl.sound.volume)
+
+    def playFireCrackSound(self):
+        chnl = self.gl.sound.BLOCKS_SOUND["firecrack"].play()
+        chnl.set_volume(self.gl.sound.volume)
+
     def playBoomSound(self):
         bl = len(self.gl.sound.BLOCKS_SOUND["explode"])
         chnl = self.gl.sound.BLOCKS_SOUND["explode"][randint(0, bl - 1)].play()

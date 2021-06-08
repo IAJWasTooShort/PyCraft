@@ -4,6 +4,9 @@ import threading
 from OpenGL.GLU import *
 from pyglet.gl import *
 
+from pypresence import Presence
+import time
+
 from functions import *
 from game.Lighting.Light import Light
 from game.Particles import Particles
@@ -14,6 +17,9 @@ from game.entity.Zombie import Zombie
 from game.world.Clouds import Clouds
 from game.world.worldGenerator import worldGenerator
 from game.blocks.CubeHandler import CubeHandler
+
+from pypresence import Presence
+import time
 
 
 class Scene:
@@ -61,7 +67,7 @@ class Scene:
         self.startPlayerPos = [0, -9000, 0]
 
     def loadPanoramaTextures(self):
-        print("Loading panorama textures...")
+        print("Loading panorama...")
         for e, i in enumerate(os.listdir("gui/bg/")):
             self.panorama[e] = \
                 pyglet.graphics.TextureGroup(pyglet.image.load("gui/bg/" + i).get_mipmapped_texture())
@@ -117,7 +123,9 @@ class Scene:
         gluOrtho2D(0, self.WIDTH, 0, self.HEIGHT)
 
     def set3d(self):
+
         glLoadIdentity()
+        #self.HEIGHT = 2
         gluPerspective(self.fov, (self.WIDTH / self.HEIGHT), 0.1, RENDER_DISTANCE)
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
@@ -173,6 +181,7 @@ class Scene:
         if self.drawCounter > self.genTime:
             self.drawCounter = 0
             self.worldGen.genChunk(self.player)
+        
 
     def updateScene(self):
 
@@ -233,6 +242,7 @@ class Scene:
             i()
 
     def draw(self):
+
         glEnable(GL_ALPHA_TEST)
         self.opaque.draw()
         glDisable(GL_ALPHA_TEST)

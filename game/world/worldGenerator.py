@@ -123,19 +123,19 @@ class worldGenerator:
 
         for i in range(y, y + treeHeight):
             self.add((x, i, z), 'log_oak')
-#        for i in range(x + -2, x + 3):
-#            for j in range(z + -2, z + 3):
-#                for k in range(y + treeHeight - 2, y + treeHeight):
-#                    self.add((i, k, j), 'leaves_oak')
-#        for i in range(treeHeight, treeHeight + 1):
-#            for j in range(-1, 2):
-#                for k in range(-1, 2):
-#                    self.add((x + j, y + i, z + k), 'leaves_oak')
-#        cl = 2
-#        for i in range(treeHeight + 1, treeHeight + 2):
-#            for j in range(-1, 2):
-#                for k in range(-1, 2):
-#                    if cl % 2 != 0:
-#                        self.add((x + j, y + i, z + k), 'leaves_oak')
-#                    cl += 1
-#        self.add((x, y + treeHeight + 1, z), 'leaves_oak')
+        for i in range(x + -2, x + 3):
+            for j in range(z + -2, z + 3):
+                for k in range(y + treeHeight - 2, y + treeHeight):
+                    self.add((i, k, j), 'leaves_oak')
+        for i in range(treeHeight, treeHeight + 1):
+            for j in range(-1, 2):
+                for k in range(-1, 2):
+                    self.add((x + j, y + i, z + k), 'leaves_oak')
+        cl = 2
+        for i in range(treeHeight + 1, treeHeight + 2):
+            for j in range(-1, 2):
+                for k in range(-1, 2):
+                    if cl % 2 != 0:
+                        self.add((x + j, y + i, z + k), 'leaves_oak')
+                    cl += 1
+        self.add((x, y + treeHeight + 1, z), 'leaves_oak')

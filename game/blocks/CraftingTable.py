@@ -4,7 +4,7 @@ from settings import *
 
 class CraftingTable:
     def __init__(self, plClass, blClass):
-        # TODO: do crafting table
+        # TODO: Fix Crafting Table
 
         self.pc = plClass
         self.bc = blClass

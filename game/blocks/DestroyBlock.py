@@ -71,6 +71,10 @@ class DestroyBlock:
         if blockName == "lava":
             self.destroyStage = -1
 
+        if blockName == "fire":
+            self.destroyStage = 10
+            self.gl.blockSound.playFireCrackSound()
+
         if self.destroyStage > 9:
             self.destroyStage = -1
             if blockByVec[0] in self.gl.cubes.cubes:
