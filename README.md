@@ -1,21 +1,21 @@
 # PyCraft
 
+## Todo:
 
-| Task           |  Not Started  | Doing | Done | Buggy |
-| -------------- | :-----------: | ----: | ---: | ----: |
-| Main Menu      |   [ ]         |  [ ]  | [x]  |  [ ]  |
-| Loading Screen |   [ ]         |  [ ]  | [x]  |  [x]  |
+| Task                  |  Not Started  | Doing | Done | Buggy |
+| --------------------- | :-----------: | ----: | ---: | ----: |
+| Main Menu             |   [ ]         |  [ ]  | [x]  |  [ ]  |
+| Loading Screen        |   [ ]         |  [ ]  | [x]  |  [x]  |
+| Tree Rendering        |   [ ]         |  [ ]  | [x]  |  [x]  |
+| Crafting              |   [x]         |  [ ]  | [ ]  |  [ ]  |
+| TNT Timer             |   [x]         |  [ ]  | [ ]  |  [ ]  |
+| Capitalise Item Names |   [x]         |  [ ]  | [ ]  |  [ ]  |
+| Fall Damage           |   [ ]         |  [x]  | [ ]  |  [ ]  |
+|                       |   [ ]         |  [ ]  | [ ]  |  [ ]  |
+|                       |   [ ]         |  [ ]  | [ ]  |  [ ]  |
+|                       |   [ ]         |  [ ]  | [ ]  |  [ ]  |
 
 
 
 ## Known Bugs
 
-
-## Todo
-
-Fix fall damage
-Fix tree rendering
-Crafting
-More Items
-Capitalise Item Names
-TNT Delay
