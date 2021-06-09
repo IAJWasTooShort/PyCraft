@@ -14,7 +14,7 @@ HEIGHT = 566  # monitor.current_h
 MAX_FPS = 100
 PAUSE = True
 IN_MENU = True
-MC_VERSION = "0.1"
+MC_VERSION = "Alpha 0.1 Test"
 clock = pygame.time.Clock()
 
 FOV = 100

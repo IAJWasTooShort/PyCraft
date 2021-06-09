@@ -233,10 +233,10 @@ def pauseMenu(mc):
     resumeButton.update(mp, mc)
     #
 
-    # Options button
-    optionsButton.x = scene.WIDTH // 2 - (optionsButton.button.width // 2)
-    optionsButton.y = scene.HEIGHT // 2 - (optionsButton.button.height // 2)
-    optionsButton.update(mp, mc)
+    # IGOptions button
+    IGoptionsButton.x = scene.WIDTH // 2 - (IGoptionsButton.button.width // 2)
+    IGoptionsButton.y = scene.HEIGHT // 2 - (IGoptionsButton.button.height // 2)
+    IGoptionsButton.update(mp, mc)
     #
 
     # Quit to title button
@@ -599,11 +599,11 @@ closeIGSettingsButton.setEvent(closeIGSettings)
 
 # Pause menu buttons
 resumeButton = Button(scene, "Back to Game", 0, 0)
-optionsButton = Button(scene, "Options", 0, 0)
+IGoptionsButton = Button(scene, "Options", 0, 0)
 quitWorldButton = Button(scene, "Quit to title", 0, 0)
 
 resumeButton.setEvent(pause)
-optionsButton.setEvent(showSettingsIG)
+IGoptionsButton.setEvent(showSettingsIG)
 quitWorldButton.setEvent(quitToMenu)
 #
 
