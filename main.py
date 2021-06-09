@@ -13,7 +13,6 @@ import time
 
 from sys import exit
 
-from game.GUI.Chat import *
 from functions import drawInfoLabel, getElpsTime, translateSeed
 from game.GUI.Button import Button
 from game.GUI.Editarea import Editarea
@@ -33,7 +32,7 @@ gc.enable()
 #gc.set_debug(gc.DEBUG_LEAK)
 
 
-programIcon = pygame.image.load('textures/pycraft.png')
+programIcon = pygame.image.load('textures/pycraft-32.png')
 
 pygame.display.set_icon(programIcon)
 
@@ -48,7 +47,6 @@ def respawn():
     player.playerDead = False
     player.position = scene.startPlayerPos
     player.lastPlayerPosOnGround = scene.startPlayerPos
-
 
 def quitToMenu():
     global PAUSE, IN_MENU, mainFunction
@@ -67,13 +65,13 @@ def quitToMenu():
     PAUSE = True
     IN_MENU = True
 
-    sound.initMusic(False)
+    sound.startMusic(False)
 
     sound.musicPlayer.play()
     sound.musicPlayer.set_volume(sound.volume)
 
     scene.resetScene()
-    scene.initScene()
+    scene.startScene()
 
     player.position = [0, -90, 0]
     player.hp = -1
@@ -104,7 +102,7 @@ def closeIGSettings():
 def startNewGame():
     global mainFunction
     sound.musicPlayer.stop()
-    sound.initMusic(True)
+    sound.startMusic(True)
     scene.worldGen = worldGenerator(scene, translateSeed(seedEditArea.text))
     mainFunction = genWorld
 
@@ -140,20 +138,18 @@ def drawSettingsMenu(mc):
     soundVolumeSliderBox.x = scene.WIDTH // 2 - (soundVolumeSliderBox.bg.width // 2)
     soundVolumeSliderBox.y = scene.HEIGHT // 2 - (soundVolumeSliderBox.bg.height // 2) - 80
     soundVolumeSliderBox.update(mp)
-    #
+
 
     # Seed edit area
     seedEditArea.x = scene.WIDTH // 2 - (seedEditArea.bg.width // 2)
     seedEditArea.y = scene.HEIGHT // 2 - (seedEditArea.bg.height // 2)
     seedEditArea.update(mp, mc, keys)
-    #
-
+    
     # Close
     closeSettingsButton.x = scene.WIDTH // 2 - (closeSettingsButton.button.width // 2)
     closeSettingsButton.y = scene.HEIGHT // 2 - (closeSettingsButton.button.height // 2) + 160
     closeSettingsButton.update(mp, mc)
-    #
-
+    
     sound.musicPlayer.set_volume(soundVolumeSliderBox.val / 100)
     sound.volume = soundVolumeSliderBox.val / 100
 
@@ -175,14 +171,12 @@ def drawIGSettingsMenu(mc):
     IGsoundVolumeSliderBox.x = scene.WIDTH // 2 - (IGsoundVolumeSliderBox.bg.width // 2)
     IGsoundVolumeSliderBox.y = scene.HEIGHT // 2 - (IGsoundVolumeSliderBox.bg.height // 2) - 80
     IGsoundVolumeSliderBox.update(mp)
-    #
-
+    
     # Close
     closeIGSettingsButton.x = scene.WIDTH // 2 - (closeIGSettingsButton.button.width // 2)
     closeIGSettingsButton.y = scene.HEIGHT // 2 - (closeIGSettingsButton.button.height // 2) + 160
     closeIGSettingsButton.update(mp, mc)
-    #
-
+    
     sound.musicPlayer.set_volume(soundVolumeSliderBox.val / 100)
     sound.volume = soundVolumeSliderBox.val / 100
 
@@ -204,15 +198,13 @@ def drawDeathScreen(mc):
     respawnButton.x = scene.WIDTH // 2 - (respawnButton.button.width // 2)
     respawnButton.y = scene.HEIGHT // 2 - (respawnButton.button.height // 2) - 50
     respawnButton.update(mp, mc)
-    #
-
+    
     # Quit to title button
     quitWorldButton.text = "Title screen"
     quitWorldButton.x = scene.WIDTH // 2 - (quitButton.button.width // 2)
     quitWorldButton.y = scene.HEIGHT // 2 - (quitButton.button.height // 2)
     quitWorldButton.update(mp, mc)
-    #
-
+    
     pygame.display.flip()
     clock.tick(MAX_FPS)
 
@@ -231,21 +223,18 @@ def pauseMenu(mc):
     resumeButton.x = scene.WIDTH // 2 - (resumeButton.button.width // 2)
     resumeButton.y = scene.HEIGHT // 2 - (resumeButton.button.height // 2) - 50
     resumeButton.update(mp, mc)
-    #
-
+    
     # IGOptions button
     IGoptionsButton.x = scene.WIDTH // 2 - (IGoptionsButton.button.width // 2)
     IGoptionsButton.y = scene.HEIGHT // 2 - (IGoptionsButton.button.height // 2)
     IGoptionsButton.update(mp, mc)
-    #
-
+    
     # Quit to title button
     quitWorldButton.text = "Quit to title"
     quitWorldButton.x = scene.WIDTH // 2 - (quitButton.button.width // 2)
     quitWorldButton.y = scene.HEIGHT // 2 - (quitButton.button.height // 2) + 50
     quitWorldButton.update(mp, mc)
-    #
-
+    
     pygame.display.flip()
     clock.tick(MAX_FPS)
 
@@ -266,13 +255,12 @@ def genWorld(mc):
         IN_MENU = False
         PAUSE = False
 
-    RPC.update(state="Loading World...", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
+    RPC.update(state="In Game", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
 
 
     proc = round((scene.worldGen.start - len(scene.worldGen.queue)) * 100 / chunkCnt)
     drawInfoLabel(scene, "Generating world", xx=scene.WIDTH // 2, yy=scene.HEIGHT // 2, style=[('', '')],
                   size=12, anchor_x='center')
-    #drawInfoLabel(scene, f"Building terrain {proc}%...", xx=scene.WIDTH // 2, yy=scene.HEIGHT // 2 - 39,
     drawInfoLabel(scene, f"Building terrain", xx=scene.WIDTH // 2, yy=scene.HEIGHT // 2 - 39,
                   style=[('', '')], size=12, anchor_x='center')
 
@@ -308,26 +296,23 @@ def drawMainMenu(mc):
     tex = gui.GUI_TEXTURES["game_logo"]
     tex.blit(scene.WIDTH // 2 - (tex.width // 2), scene.HEIGHT - tex.height - (scene.HEIGHT // 15))
 
-    drawInfoLabel(scene, f"PyCraft {MC_VERSION} By IAJ", xx=10, yy=10, style=[('', '')], size=12)
+    drawInfoLabel(scene, f"PyCraft {VERSION} By IAJ", xx=10, yy=10, style=[('', '')], size=12)
 
     # Singleplayer button
     singleplayerButton.x = scene.WIDTH // 2 - (singleplayerButton.button.width // 2)
     singleplayerButton.y = scene.HEIGHT // 2 - (singleplayerButton.button.height // 2) - 25
     singleplayerButton.update(mp, mc)
-    #
-
+    
     # Options button
     optionsButton.x = scene.WIDTH // 2 - (optionsButton.button.width // 2)
     optionsButton.y = scene.HEIGHT // 2 - (optionsButton.button.height // 2) + 25
     optionsButton.update(mp, mc)
-    #
-
+    
     # Quit button
     quitButton.x = scene.WIDTH // 2 - (quitButton.button.width // 2)
     quitButton.y = scene.HEIGHT // 2 - (quitButton.button.height // 2) + 75
     quitButton.update(mp, mc)
-    #
-
+    
     # Splash
     glPushMatrix()
     glTranslatef((scene.WIDTH // 2 + (tex.width // 2)) - 90, scene.HEIGHT - tex.height - (scene.HEIGHT // 15) + 15, 0.0)
@@ -337,8 +322,7 @@ def drawMainMenu(mc):
     drawInfoLabel(scene, splash, xx=1, yy=1, style=[('', '')], scale=var8, size=30, anchor_x='center',
                   label_color=(255, 255, 0), shadow_color=(63, 63, 0))
     glPopMatrix()
-    #
-
+    
     pygame.display.flip()
     clock.tick(MAX_FPS)
 
@@ -361,7 +345,7 @@ resizeEvent = False
 LAST_SAVED_RESOLUTION = [WIDTH, HEIGHT]
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.DOUBLEBUF | pygame.OPENGL | pygame.RESIZABLE)
-pygame.display.set_caption(f"PyCraft {MC_VERSION} By IAJ")
+pygame.display.set_caption(f"PyCraft {VERSION} By IAJ")
 
 # Loading screen
 glClearColor(1, 1, 1, 1)
@@ -376,7 +360,6 @@ gluOrtho2D(0, WIDTH, 0, HEIGHT)
 logo = pyglet.resource.image("gui/logo.png")
 logo.blit(WIDTH // 2 - (logo.width // 2), HEIGHT // 2 - (logo.height // 2))
 pygame.display.flip()
-#
 
 sound = Sound()
 scene = Scene()
@@ -392,7 +375,7 @@ scene.sound = sound
 scene.player = player
 
 scene.deathScreen = deathScreen
-scene.initScene()
+scene.startScene()
 
 print("Loading sounds...")
 sound.BLOCKS_SOUND["pickUp"] = pygame.mixer.Sound("sounds/pick.mp3")
@@ -410,7 +393,7 @@ for e, i in enumerate(os.listdir("sounds/step/")):
         sound.BLOCKS_SOUND["step"][soundName] = []
 
     sound.BLOCKS_SOUND["step"][soundName].append(pygame.mixer.Sound("sounds/step/" + i))
-    print("Successful loaded", soundName, "#" + soundNum, "sound!")
+    print("Loaded", soundName, "#" + soundNum, "sound!")
 
 print("Loading dig sounds...")
 sound.BLOCKS_SOUND["dig"] = {}
@@ -422,7 +405,7 @@ for e, i in enumerate(os.listdir("sounds/dig/")):
         sound.BLOCKS_SOUND["dig"][soundName] = []
 
     sound.BLOCKS_SOUND["dig"][soundName].append(pygame.mixer.Sound("sounds/dig/" + i))
-    print("Successful loaded", soundName, "#" + soundNum, "sound!")
+    print("Loaded", soundName, "#" + soundNum, "sound!")
 
 print("Loading explode sounds...")
 sound.BLOCKS_SOUND["explode"] = []
@@ -431,7 +414,7 @@ for e, i in enumerate(os.listdir("sounds/explode/")):
     soundNum = i.split(".")[0][-1]
 
     sound.BLOCKS_SOUND["explode"].append(pygame.mixer.Sound("sounds/explode/" + i))
-    print("Successful loaded", soundName, "#" + soundNum, "sound!")
+    print("Loaded", soundName, "#" + soundNum, "sound!")
 
 print("Loading damage sounds...")
 sound.SOUNDS["damage"] = {}
@@ -443,7 +426,7 @@ for e, i in enumerate(os.listdir("sounds/damage/")):
         sound.SOUNDS["damage"][soundName] = []
 
     sound.SOUNDS["damage"][soundName].append(pygame.mixer.Sound("sounds/damage/" + i))
-    print("Successful loaded", soundName, "#" + soundNum, "sound!")
+    print("Loaded", soundName, "#" + soundNum, "sound!")
 
 print("Loading GUI sounds...")
 sound.SOUNDS["GUI"] = {}
@@ -455,20 +438,20 @@ for e, i in enumerate(os.listdir("sounds/gui/")):
         sound.SOUNDS["GUI"][soundName] = []
 
     sound.SOUNDS["GUI"][soundName].append(pygame.mixer.Sound("sounds/gui/" + i))
-    print("Successful loaded", soundName, "#" + soundNum, "sound!")
+    print("Loaded", soundName, "#" + soundNum, "sound!")
 
 print("Loading menu music...")
 for e, i in enumerate(os.listdir("sounds/music/menu")):
     sound.MENU_MUSIC.append("sounds/music/menu/" + i)
-    print("Successful loaded", i, "music!")
+    print("Loaded", i, "music!")
 
 print("Loading game music...")
 for e, i in enumerate(os.listdir("sounds/music/game")):
     sound.MUSIC.append("sounds/music/game/" + i)
-    print("Successful loaded", i, "music!")
-sound.initMusic(False)
+    print("Loaded", i, "music!")
+sound.startMusic(False)
 
-print("Music loaded successful!")
+print("Music loaded!")
 
 print("Loading GUI textures...")
 gui.GUI_TEXTURES = {
@@ -559,7 +542,7 @@ texture.height *= 2
 
 gui.addGuiElement("crosshair", (scene.WIDTH // 2 - 9, scene.HEIGHT // 2 - 9))
 
-player.inventory.initWindow()
+player.inventory.startWindow()
 
 showInfoLabel = False
 
@@ -580,7 +563,6 @@ quitButton = Button(scene, "Quit game", 0, 0)
 singleplayerButton.setEvent(startNewGame)
 optionsButton.setEvent(showSettings)
 quitButton.setEvent(exit)
-#
 
 # Settings objects
 closeSettingsButton = Button(scene, "Close", 0, 0)
@@ -588,14 +570,12 @@ soundVolumeSliderBox = Sliderbox(scene, "Sound volume:", 100, 0, 0)
 seedEditArea = Editarea(scene, "World seed", 0, 0)
 
 closeSettingsButton.setEvent(closeSettings)
-#
 
 # IGSettings objects
 closeIGSettingsButton = Button(scene, "Back To Game", 0, 0)
 IGsoundVolumeSliderBox = Sliderbox(scene, "Sound volume:", 100, 0, 0)
 
 closeIGSettingsButton.setEvent(closeIGSettings)
-#
 
 # Pause menu buttons
 resumeButton = Button(scene, "Back to Game", 0, 0)
@@ -605,7 +585,6 @@ quitWorldButton = Button(scene, "Quit to title", 0, 0)
 resumeButton.setEvent(pause)
 IGoptionsButton.setEvent(showSettingsIG)
 quitWorldButton.setEvent(quitToMenu)
-#
 
 # Death screen buttons
 respawnButton = Button(scene, "Respawn", 0, 0)
@@ -613,7 +592,6 @@ quitWorldButton = Button(scene, "Quit to title", 0, 0)
 
 respawnButton.setEvent(respawn)
 quitWorldButton.setEvent(quitToMenu)
-#
 
 print("Loading complete!")
 mainMenuRotation = [50, 180, True]
@@ -683,11 +661,6 @@ while True:
                         player.inventory.activeInventory = 7
                     if event.key == pygame.K_9:
                         player.inventory.activeInventory = 8
-                    #if event.key == pygame.K_q:
-                    #    droppedBlock.addBlock(Player, player.position, "bedrock", True)
-                    #    #player.dropItem()
-                    if event.key == pygame.K_t:
-                        Chat()
                     if event.key == pygame.K_p:
                         player.gm1()
                     if event.key == pygame.K_F3:
@@ -738,7 +711,7 @@ while True:
         gui.update()
 
         if showInfoLabel:
-            drawInfoLabel(scene, f"PyCraft {MC_VERSION} By IAJ ({MC_VERSION}/vanilla)\n"
+            drawInfoLabel(scene, f"PyCraft {VERSION} By IAJ ({VERSION}/vanilla)\n"
                                  f"{round(clock.get_fps())} fps\n"
                                  f"\n"
                                  f"XYZ: {round(player.x(), 3)} / {round(player.y(), 5)} / {round(player.z(), 3)}\n"

@@ -64,10 +64,6 @@ class Particles:
                 i[0][0] += i[3][0] / 50
                 i[0][2] += i[3][2] / 50
 
-            # self.gl.stuffBatch.add(24,
-            #                          GL_QUADS,
-            #                          i[1].t[1],
-            #                          ('v3f', flatten(cube_vertices((i[0][0], i[0][1], i[0][2]), i[2]))))
             x, y, z = tuple(i[0])
             X, Y, Z = x + i[2], y + i[2], z + i[2]
 

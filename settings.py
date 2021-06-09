@@ -9,12 +9,12 @@ mainFont = font.load('gui/main.ttf', 15)
 pygame.init()
 
 monitor = pygame.display.Info()
-WIDTH = 927  # monitor.current_w
-HEIGHT = 566  # monitor.current_h
+WIDTH = 927
+HEIGHT = 566
 MAX_FPS = 100
 PAUSE = True
 IN_MENU = True
-MC_VERSION = "Alpha 0.1 Test"
+VERSION = "Alpha 0.1 Test"
 clock = pygame.time.Clock()
 
 FOV = 100

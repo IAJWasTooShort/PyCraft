@@ -4,7 +4,7 @@ from settings import *
 
 class GUI:
     def __init__(self, gl):
-        print("Init GUI class...")
+        print("Started GUI class...")
 
         self.GUI_TEXTURES = {}
         self.shows = {}

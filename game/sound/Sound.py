@@ -5,7 +5,7 @@ import pygame
 
 class Sound:
     def __init__(self):
-        print("Init Sound class...")
+        print("Started Sound class...")
         self.BLOCKS_SOUND = {}
         self.SOUNDS = {}
         self.MUSIC = []
@@ -16,7 +16,7 @@ class Sound:
 
         self.volume = 1
 
-    def initMusic(self, t):
+    def startMusic(self, t):
         self.musicPlayer.stop()
         del self.musicPlayer
         self.musicPlayer = pygame.mixer.music

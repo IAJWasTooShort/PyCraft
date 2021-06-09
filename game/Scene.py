@@ -13,7 +13,6 @@ from game.Particles import Particles
 from game.blocks.DestroyBlock import DestroyBlock
 from game.blocks.droppedBlock import droppedBlock
 from game.entity.Inventory import Inventory
-from game.entity.Zombie import Zombie
 from game.world.Clouds import Clouds
 from game.world.worldGenerator import worldGenerator
 from game.blocks.CubeHandler import CubeHandler
@@ -81,8 +80,8 @@ class Scene:
         self.reticle = pyglet.graphics.vertex_list(4, ('v2f', (x - 10, y, x + 10, y, x, y - 10, x, y + 10)),
                                                    ('c3f', (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)))
 
-    def initScene(self):
-        print("Init OpenGL scene...")
+    def startScene(self):
+        print("Started OpenGL scene...")
 
         glClearColor(0.5, 0.7, 1, 1)
         glClearDepth(1.0)
@@ -110,10 +109,6 @@ class Scene:
         self.player.inventory = Inventory(self)
         self.cubes = CubeHandler(self.opaque, self.block, self.opaque,
                                  ('leaves_taiga', 'leaves_oak', 'tall_grass', 'nocolor'), self)
-
-        self.zombie = Zombie(self)
-        self.zombie.position = [0, 53, 0]
-        self.entity.append(self.zombie)
 
         self.set3d()
 

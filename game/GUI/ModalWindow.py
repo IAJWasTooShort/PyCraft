@@ -2,6 +2,9 @@ import pygame
 from OpenGL.GL import *
 from functions import checkHover
 
+from pypresence import Presence
+import time
+
 
 class ModalWindow:
     def __init__(self, gl):
@@ -25,6 +28,8 @@ class ModalWindow:
         self.gl.allowEvents["showCrosshair"] = True
 
         self.gl.updateEvents.pop(self.windowId)
+
+        
 
     def drawWindow(self):
         self.clickWait += 1

@@ -27,7 +27,7 @@ def load_textures(self):
                 self.texture[n] = pyglet.graphics.TextureGroup(texture)
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
 
-                print("Successful loaded", n, "texture!")
+                print("Loaded", n, "texture!")
     done = []
     items = sorted(self.texture_dir.items(), key=lambda i: i[0])
     for n1, d in items:

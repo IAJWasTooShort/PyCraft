@@ -34,7 +34,7 @@ class Inventory:
                                                     font_size=10,
                                                     x=self.gl.WIDTH // 2, y=60)
 
-    def initWindow(self):
+    def startWindow(self):
 
         self.window = ModalWindow(self.gl)
         self.window.setWindow(self.gl.gui.GUI_TEXTURES["inventory_window"])
