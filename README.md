@@ -1,4 +1,9 @@
-# PyCraft
+<p align=center>
+<img src="https://raw.githubusercontent.com/IAJWasTooShort/PyCraft/main/textures/pycraft.png"/>
+</p>
+
+# PyCraft <img src="https://img.shields.io/github/v/release/IAJWasTooShort/PyCraft?include_prereleases"/>
+
 
 PyCraft is a recreation of Minecraft in Python 3 made with PyGame.
 
