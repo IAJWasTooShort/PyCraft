@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/IAJWasTooShort/PyCraft/main/textures/pycraft.png"/>
 </p>
 
-# PyCraft <img src="https://img.shields.io/github/v/release/IAJWasTooShort/PyCraft?include_prereleases"/>
+# PyCraft [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=There%20is%20this%20Minecraft%20like%20game%20called%20PyCraft%2C%20check%20it%20out%20at%20https%3A%2F%2Fgithub.com%2FIAJWasTooShort%2FPyCraft!&hashtags=Minecraft,Python,PyCraft) <img src="https://img.shields.io/github/v/release/IAJWasTooShort/PyCraft?include_prereleases"/>
 
 PyCraft is a recreation of Minecraft in Python 3 made with PyGame.
 
