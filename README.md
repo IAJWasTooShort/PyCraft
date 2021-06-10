@@ -6,7 +6,7 @@
 | --------------------- | :-----------: | ----: | ---: | ----: |
 | Main Menu             | - [ ]         |- [ ]  |- [x] |- [ ]  |
 | Loading Screen        | - [ ]         |- [ ]  |- [x] |- [x]  |
-| Tree Rendering        | - [ ]         |- [ ]  |- [x] |- [x]  |
+| Tree Rendering        | <ul><li>[ ] Blog </li></ul>         |- [ ]  |- [x] |- [x]  |
 | Crafting              | - [x]         |- [ ]  |- [ ] |- [ ]  |
 | TNT Timer             | - [x]         |- [ ]  |- [ ] |- [ ]  |
 | Capitalise Item Names | - [x]         |- [ ]  |- [ ] |- [ ]  |
