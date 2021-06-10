@@ -4,16 +4,16 @@
 
 | Task                  |  Not Started  | Doing | Done | Buggy |
 | --------------------- | :-----------: | ----: | ---: | ----: |
-| Main Menu             |   [ ]         |  [ ]  | [x]  |  [ ]  |
-| Loading Screen        |   [ ]         |  [ ]  | [x]  |  [x]  |
-| Tree Rendering        |   [ ]         |  [ ]  | [x]  |  [x]  |
-| Crafting              |   [x]         |  [ ]  | [ ]  |  [ ]  |
-| TNT Timer             |   [x]         |  [ ]  | [ ]  |  [ ]  |
-| Capitalise Item Names |   [x]         |  [ ]  | [ ]  |  [ ]  |
-| Fall Damage           |   [ ]         |  [x]  | [ ]  |  [ ]  |
-|                       |   [ ]         |  [ ]  | [ ]  |  [ ]  |
-|                       |   [ ]         |  [ ]  | [ ]  |  [ ]  |
-|                       |   [ ]         |  [ ]  | [ ]  |  [ ]  |
+| Main Menu             | - [ ]         |- [ ]  |- [x] |- [ ]  |
+| Loading Screen        | - [ ]         |- [ ]  |- [x] |- [x]  |
+| Tree Rendering        | - [ ]         |- [ ]  |- [x] |- [x]  |
+| Crafting              | - [x]         |- [ ]  |- [ ] |- [ ]  |
+| TNT Timer             | - [x]         |- [ ]  |- [ ] |- [ ]  |
+| Capitalise Item Names | - [x]         |- [ ]  |- [ ] |- [ ]  |
+| Fall Damage           | - [ ]         |- [x]  |- [ ] |- [ ]  |
+|                       | - [ ]         |- [ ]  |- [ ] |- [ ]  |
+|                       | - [ ]         |- [ ]  |- [ ] |- [ ]  |
+|                       | - [ ]         |- [ ]  |- [ ] |- [ ]  |
 
 
 
