@@ -4,9 +4,12 @@
 
 # PyCraft <img src="https://img.shields.io/github/v/release/IAJWasTooShort/PyCraft?include_prereleases"/>
 
-
 PyCraft is a recreation of Minecraft in Python 3 made with PyGame.
 
+## Table of Contents
+* [Installing](#installing)
+* [Contributing/Issue Reporting](#contributingissuereporting)
+* [Todo](#todo)
 
 ## Installing
 
