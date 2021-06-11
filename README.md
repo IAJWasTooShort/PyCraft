@@ -17,16 +17,16 @@ Download the latest [release](https://github.com/IAJWasTooShort/PyCraft/releases
 
 #### Or run it locally
 
-```shell
+```console
 $ git clone https://github.com/IAJWasTooShort/PyCraft.git
 ```
-```shell
+```console
 $ cd PyCraft
 ```
-```shell
+```console
 $ pip install -r requirements.txt
 ```
-```shell
+```console
 $ python3 main.py
 ```
 

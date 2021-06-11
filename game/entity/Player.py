@@ -1,9 +1,13 @@
+from numpy.core.shape_base import block
+from pygame.constants import SHOWN
+from game.Scene import Scene
 from game.blocks.CubeHandler import CubeHandler
 from game.blocks.droppedBlock import droppedBlock
 import math
 from random import randint
 
 from game.blocks.Cube import Cube
+import settings
 
 from pypresence import Presence
 import time
@@ -89,7 +93,8 @@ class Player:
 
             key = pygame.key.get_pressed()
             if key[pygame.K_LCTRL]:
-                self.acceleration = 0.009
+                FOV = 200
+                self.acceleration = 0.01
             if self.kW > 0 or key[pygame.K_w]:
                 DX += dx
                 DZ -= dz
