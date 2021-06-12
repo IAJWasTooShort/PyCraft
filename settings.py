@@ -17,6 +17,8 @@ IN_MENU = True
 VERSION = "Alpha 0.1 Test"
 clock = pygame.time.Clock()
 
+DiscordRP = True
+
 FOV = 100
 RENDER_DISTANCE = 100
 

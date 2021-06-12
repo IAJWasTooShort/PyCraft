@@ -32,14 +32,27 @@ gc.enable()
 #gc.set_debug(gc.DEBUG_LEAK)
 
 
-programIcon = pygame.image.load('textures/pycraft-32.png')
+
+working_dir = os.path.dirname(os.path.realpath(__file__))
+image_dir = os.path.join(working_dir, 'textures')
+sound_dir = os.path.join(working_dir, 'sounds')
+gui_dir = os.path.join(working_dir, 'gui')
+
+pyglet.resource.path = [working_dir, image_dir, sound_dir, gui_dir]
+pyglet.resource.reindex()
+
+programIcon = pygame.image.load('textures\pycraft-32.png')
 
 pygame.display.set_icon(programIcon)
 
+pygame.DOUBLEBUF
+
 client_id = "851879525590630411"
 RPC = Presence(client_id)
-RPC.connect()
 
+if DiscordRP == True:
+    RPC.connect()
+    RPC.update(state="Loading", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
 
 def respawn():
     pause()
@@ -255,7 +268,9 @@ def genWorld(mc):
         IN_MENU = False
         PAUSE = False
 
-    RPC.update(state="In Game", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
+    if DiscordRP == True:
+        #RPC.connect()
+        RPC.update(state="In Game", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
 
 
     proc = round((scene.worldGen.start - len(scene.worldGen.queue)) * 100 / chunkCnt)
@@ -273,7 +288,10 @@ def drawMainMenu(mc):
     glFogf(GL_FOG_START, 0)
     glFogf(GL_FOG_END, 1000)
 
-    RPC.update(state="On the Main Menu", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
+
+    if DiscordRP == True:
+        #RPC.connect()
+        RPC.update(state="On the Main Menu", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
 
 
     scene.set3d()
@@ -339,7 +357,10 @@ def drawMainMenu(mc):
 
 print("Loading the game...")
 
-RPC.update(state="Loading PyCraft...", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
+#if DiscordRP == True:
+#    RPC.connect()
+#    RPC.update(state="Loading PyCraft...", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
+
 
 resizeEvent = False
 LAST_SAVED_RESOLUTION = [WIDTH, HEIGHT]
@@ -357,7 +378,7 @@ glMatrixMode(GL_PROJECTION)
 glLoadIdentity()
 gluOrtho2D(0, WIDTH, 0, HEIGHT)
 
-logo = pyglet.resource.image("gui/logo.png")
+logo = pyglet.resource.image("logo.png")
 logo.blit(WIDTH // 2 - (logo.width // 2), HEIGHT // 2 - (logo.height // 2))
 pygame.display.flip()
 
@@ -454,24 +475,25 @@ sound.startMusic(False)
 print("Music loaded!")
 
 print("Loading GUI textures...")
+#gui/
 gui.GUI_TEXTURES = {
-    "crafting_table": pyglet.resource.image("gui/crafting_table.png"),
-    "inventory_window": pyglet.resource.image("gui/inventory_window.png"),
-    "crosshair": pyglet.resource.image("gui/crosshair.png"),
-    "inventory": pyglet.resource.image("gui/inventory.png"),
-    "sel_inventory": pyglet.resource.image("gui/sel_inventory.png"),
-    "fullheart": pyglet.resource.image("gui/fullheart.png"),
-    "halfheart": pyglet.resource.image("gui/halfheart.png"),
-    "heartbg": pyglet.resource.image("gui/heartbg.png"),
-    "game_logo": pyglet.resource.image("gui/game_logo.png"),
-    "button_bg": pyglet.resource.image("gui/gui_elements/button_bg.png"),
-    "button_bg_hover": pyglet.resource.image("gui/gui_elements/button_bg_hover.png"),
-    "edit_bg": pyglet.resource.image("gui/gui_elements/edit_bg.png"),
-    "options_background": pyglet.resource.image("gui/gui_elements/options_background.png"),
-    "black": pyglet.resource.image("gui/gui_elements/black.png"),
-    "red": pyglet.resource.image("gui/gui_elements/red.png"),
-    "selected": pyglet.resource.image("gui/gui_elements/selected.png"),
-    "slider": pyglet.resource.image("gui/gui_elements/slider.png"),
+    "crafting_table": pyglet.resource.image("crafting_table.png"),
+    "inventory_window": pyglet.resource.image("inventory_window.png"),
+    "crosshair": pyglet.resource.image("crosshair.png"),
+    "inventory": pyglet.resource.image("inventory.png"),
+    "sel_inventory": pyglet.resource.image("sel_inventory.png"),
+    "fullheart": pyglet.resource.image("fullheart.png"),
+    "halfheart": pyglet.resource.image("halfheart.png"),
+    "heartbg": pyglet.resource.image("heartbg.png"),
+    "game_logo": pyglet.resource.image("game_logo.png"),
+    "button_bg": pyglet.resource.image("gui_elements/button_bg.png"),
+    "button_bg_hover": pyglet.resource.image("gui_elements/button_bg_hover.png"),
+    "edit_bg": pyglet.resource.image("gui_elements/edit_bg.png"),
+    "options_background": pyglet.resource.image("gui_elements/options_background.png"),
+    "black": pyglet.resource.image("gui_elements/black.png"),
+    "red": pyglet.resource.image("gui_elements/red.png"),
+    "selected": pyglet.resource.image("gui_elements/selected.png"),
+    "slider": pyglet.resource.image("gui_elements/slider.png"),
 }
 
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
@@ -547,7 +569,7 @@ player.inventory.startWindow()
 showInfoLabel = False
 
 print("Loading splashes...")
-splfile = open("gui/splashes.txt", "r", encoding='utf-8')
+splfile = open("gui\splashes.txt", "r", encoding='utf-8')
 splash = splfile.read().split("\n")
 splash = splash[randint(0, len(splash) - 1)]
 splfile.close()

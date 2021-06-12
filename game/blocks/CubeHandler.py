@@ -100,7 +100,7 @@ class CubeHandler:
         if p in self.cubes:
             return
         cube = self.cubes[p] = Cube(t, p, self.block[t],
-                                    'alpha' if t in self.alpha_textures else 'blend' if (t == 'water' or t == "lava")
+                                    'alpha' if t in self.alpha_textures else 'blend' if (t == 'water' or t == "lava" or t =="fire")
                                     else 'solid')
 
         for adj in adjacent(*cube.p):
