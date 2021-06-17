@@ -14,10 +14,10 @@ HEIGHT = 566
 MAX_FPS = 100
 PAUSE = True
 IN_MENU = True
-VERSION = "Alpha 0.1 Test"
+VERSION = "Alpha 0.1.3 Test"
 clock = pygame.time.Clock()
 
-DiscordRP = True
+DiscordRP = False
 
 FOV = 100
 RENDER_DISTANCE = 100

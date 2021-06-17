@@ -322,6 +322,7 @@ class Player:
         return self.position[2]
 
     def gm1(self):
+        self.inventory.addItem('diamond_sword')
         self.inventory.addBlock('tnt')
         #self.inventory.addBlock('crafting_table')
         self.inventory.addBlock('fire')

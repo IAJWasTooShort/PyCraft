@@ -35,6 +35,14 @@ def load_textures(self):
         if n in done:
             continue
         done += [n]
+        if d.startswith('textures/items'):
+            if d == 'textures/items':
+                self.inventory_textures[n] = pyglet.resource.image(f"{d}/{n}.png")
+                self.block[n] = t[n], t[n], t[n], t[n], t[n], t[n]
+
+            if d == 'textures/items':
+                self.inventory_textures[n] = pyglet.resource.image(f"{d}/{n}.png")
+                self.item[n] = t[n]
         if d.startswith('textures/blocks'):
             if d == 'textures/blocks':
                 self.inventory_textures[n] = pyglet.resource.image(f"{d}/{n}.png")
@@ -140,7 +148,6 @@ def drawInfoLabel(gl, text, xx=0, yy=0, style=None, size=15, anchor_x='left', an
 
 def getElpsTime():
     return time.perf_counter_ns() * 1000 / 1000000000
-
 
 def checkHover(ox, oy, ow, oh, mx, my):
     if ox < mx < ox + ow and oy < my < oy + oh:

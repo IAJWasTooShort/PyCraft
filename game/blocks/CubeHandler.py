@@ -18,6 +18,7 @@ class CubeHandler:
         self.gl = gl
         self.fluids = {}
         self.collidable = {}
+        self.gravity = {}
 
         '''self.top_color = ('c3f', (0.1,) * 12)
         self.ns_color = ('c3f', (0.1,) * 12)
@@ -63,6 +64,8 @@ class CubeHandler:
         if shown:
             if (cube.name != 'water' and cube.name != 'lava' and cube.name != 'fire') and cube.p not in self.collidable:
                 self.collidable[cube.p] = cube
+            elif cube.p in self.gravity:
+                print("smth will happen later :)")
         else:
             if cube.p in self.collidable:
                 del self.collidable[cube.p]

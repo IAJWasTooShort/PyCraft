@@ -1,3 +1,4 @@
+from game.items.ItemHandler import ItemHandler
 import gc
 import threading
 
@@ -35,7 +36,7 @@ class Scene:
 
         self.lookingAt = "Nothing"
 
-        self.texture, self.block, self.texture_dir, self.inventory_textures = {}, {}, {}, {}
+        self.texture, self.block, self.item, self.texture_dir, self.inventory_textures = {}, {}, {}, {}, {}
         self.fov = FOV
         self.updateEvents = []
         self.entity = []
@@ -109,6 +110,8 @@ class Scene:
         self.player.inventory = Inventory(self)
         self.cubes = CubeHandler(self.opaque, self.block, self.opaque,
                                  ('leaves_taiga', 'leaves_oak', 'tall_grass', 'nocolor'), self)
+        self.items = ItemHandler(self.opaque, self.item, self.opaque,
+                                 ('diamond_sword', 'nocolor'), self)
 
         self.set3d()
 

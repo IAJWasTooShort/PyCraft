@@ -1,0 +1,60 @@
+bedrock
+brick
+dirt
+glass
+glowstone
+gravel
+ladder
+lava
+water
+leaves_oak
+leaves_taiga
+missing_tile
+nocolor
+sand
+stone
+iron_block
+
+planks_oak
+NOT ADDED YET: [planks_spruce
+		planks_birch
+		planks_jungle
+		planks_acacia
+		planks_dark_oak]
+
+cactus
+chiseled_sandstone
+crafting_table
+cut_sandstone
+cut_sandstone
+fire
+grass
+sandstone
+tnt
+log_oak
+
+coal_ore
+diamond_ore
+emerald_ore
+iron_ore
+lapis_ore
+redstone_ore
+
+black_wool
+blue_wool
+brown_wool
+cyan_wool
+gray_wool
+green_wool
+light_blue_wool
+light_graw_wool
+lime_wool
+magenta_wool
+orange_wool
+pink_wool
+purple_wool
+red_wool
+white_wool
+yellow_wool
+
+diamond_sword

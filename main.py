@@ -31,8 +31,6 @@ import gc
 gc.enable()
 #gc.set_debug(gc.DEBUG_LEAK)
 
-
-
 working_dir = os.path.dirname(os.path.realpath(__file__))
 image_dir = os.path.join(working_dir, 'textures')
 sound_dir = os.path.join(working_dir, 'sounds')
@@ -73,7 +71,7 @@ def quitToMenu():
     drawInfoLabel(scene, "Quitting to main menu", xx=scene.WIDTH // 2, yy=scene.HEIGHT // 2,
                   style=[('', '')], size=12, anchor_x='center')
     pygame.display.flip()
-    clock.tick(MAX_FPS)
+    clock.tick(MAX_FPS - 40)
 
     PAUSE = True
     IN_MENU = True
@@ -167,7 +165,7 @@ def drawSettingsMenu(mc):
     sound.volume = soundVolumeSliderBox.val / 100
 
     pygame.display.flip()
-    clock.tick(MAX_FPS)
+    clock.tick(MAX_FPS - 40)
 
 def drawIGSettingsMenu(mc):
     scene.set2d()
@@ -194,7 +192,7 @@ def drawIGSettingsMenu(mc):
     sound.volume = soundVolumeSliderBox.val / 100
 
     pygame.display.flip()
-    clock.tick(MAX_FPS)
+    clock.tick(MAX_FPS - 40)
 
 def drawDeathScreen(mc):
     bg = gui.GUI_TEXTURES["red"]
@@ -219,7 +217,7 @@ def drawDeathScreen(mc):
     quitWorldButton.update(mp, mc)
     
     pygame.display.flip()
-    clock.tick(MAX_FPS)
+    clock.tick(MAX_FPS - 40)
 
 def pauseMenu(mc):
     bg = gui.GUI_TEXTURES["black"]
@@ -249,7 +247,7 @@ def pauseMenu(mc):
     quitWorldButton.update(mp, mc)
     
     pygame.display.flip()
-    clock.tick(MAX_FPS)
+    clock.tick(MAX_FPS - 40)
 
 def genWorld(mc):
     global IN_MENU, PAUSE, resizeEvent
@@ -280,7 +278,7 @@ def genWorld(mc):
                   style=[('', '')], size=12, anchor_x='center')
 
     pygame.display.flip()
-    clock.tick(MAX_FPS)
+    clock.tick(MAX_FPS - 40)
 
 def drawMainMenu(mc):
     global mainMenuRotation, IN_MENU, PAUSE
@@ -292,7 +290,6 @@ def drawMainMenu(mc):
     if DiscordRP == True:
         #RPC.connect()
         RPC.update(state="On the Main Menu", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
-
 
     scene.set3d()
 
@@ -342,7 +339,7 @@ def drawMainMenu(mc):
     glPopMatrix()
     
     pygame.display.flip()
-    clock.tick(MAX_FPS)
+    clock.tick(MAX_FPS - 40)
 
     if mainMenuRotation[0] < 25:
         mainMenuRotation[2] = False

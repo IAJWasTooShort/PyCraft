@@ -17,6 +17,7 @@ class Inventory:
         self.gl = glClass
         self.inventory = {}
         self.blocksLabel = {}
+        self.itemsLabel = {}
         self.activeInventory = 0
         self.heartAnimation = []
         self.draggingItem = []
@@ -29,6 +30,11 @@ class Inventory:
         for i in range(9 * 5 + 1):
             self.inventory[i] = ["sand", 0]
             self.blocksLabel[i] = pyglet.text.Label("0",
+                                                    font_name='Minecraft Rus',
+                                                    color=(255, 255, 255, 255),
+                                                    font_size=10,
+                                                    x=self.gl.WIDTH // 2, y=60)
+            self.itemsLabel[i] = pyglet.text.Label("0",
                                                     font_name='Minecraft Rus',
                                                     color=(255, 255, 255, 255),
                                                     font_size=10,
@@ -141,6 +147,26 @@ class Inventory:
                 lbl.draw()
 
     def addBlock(self, name):
+        ext = False
+        extech = -1
+        sech = -1
+        for item in self.inventory.items():
+            i = item[1]
+            if i[1] == 0 and sech == -1:
+                sech = item[0]
+            elif i[1] != 0:
+                if i[0] == name and i[1] + 1 <= 64:
+                    ext = True
+                    extech = item[0]
+                    break
+        if ext:
+            self.inventory[extech][1] += 1
+        else:
+            if self.inventory[self.activeInventory][1] == 0:
+                sech = self.activeInventory
+            self.inventory[sech] = [name, 1]
+
+    def addItem(self, name):
         ext = False
         extech = -1
         sech = -1
