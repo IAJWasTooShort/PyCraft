@@ -14,10 +14,10 @@ HEIGHT = 566
 MAX_FPS = 100
 PAUSE = True
 IN_MENU = True
-VERSION = "Alpha 0.1.3 Test"
+VERSION = "Alpha 0.1.4 Textures Test"
 clock = pygame.time.Clock()
 
-DiscordRP = False
+DiscordRP = True
 
 FOV = 100
 RENDER_DISTANCE = 100

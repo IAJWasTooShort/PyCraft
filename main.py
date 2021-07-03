@@ -1,3 +1,4 @@
+from game.items.ItemHandler import ItemHandler
 from numpy.core.shape_base import block
 from game.blocks.droppedBlock import droppedBlock
 import gc
@@ -26,8 +27,9 @@ from game.world.Biomes import getBiomeByTemp
 from game.world.worldGenerator import worldGenerator
 from settings import *
 
-import gc
+import win32ui
 
+import gc
 gc.enable()
 #gc.set_debug(gc.DEBUG_LEAK)
 
@@ -48,7 +50,25 @@ pygame.DOUBLEBUF
 client_id = "851879525590630411"
 RPC = Presence(client_id)
 
-if DiscordRP == True:
+def IsRunning(WindowName):
+    try:
+        if win32ui.FindWindow(None, WindowName):
+            return True
+    except win32ui.error:
+        return False
+
+
+import subprocess
+
+def process_exists(process_name):
+    call = 'TASKLIST', '/FI', 'imagename eq %s' % process_name
+    output = subprocess.check_output(call).decode()
+    last_line = output.strip().split('\r\n')[-1]
+    return last_line.lower().startswith(process_name.lower())
+
+process_exists("discord.exe")
+
+if DiscordRP == True and process_exists("discord.exe"):
     RPC.connect()
     RPC.update(state="Loading", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
 
@@ -91,7 +111,6 @@ def quitToMenu():
     gc.collect()
     mainFunction = drawMainMenu
 
-
 def showSettings():
     global mainFunction
     mainFunction = drawSettingsMenu
@@ -100,7 +119,6 @@ def showSettingsIG():
     global mainFunction
     mainfunction = drawIGSettingsMenu
 
-
 def closeSettings():
     global mainFunction
     mainFunction = drawMainMenu
@@ -108,7 +126,6 @@ def closeSettings():
 def closeIGSettings():
     global mainFunction
     mainFunction = pauseMenu
-
 
 def startNewGame():
     global mainFunction
@@ -267,8 +284,8 @@ def genWorld(mc):
         PAUSE = False
 
     if DiscordRP == True:
-        #RPC.connect()
-        RPC.update(state="In Game", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
+        if process_exists("discord.exe"):
+            RPC.update(state="In Game", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
 
 
     proc = round((scene.worldGen.start - len(scene.worldGen.queue)) * 100 / chunkCnt)
@@ -288,8 +305,8 @@ def drawMainMenu(mc):
 
 
     if DiscordRP == True:
-        #RPC.connect()
-        RPC.update(state="On the Main Menu", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
+        if process_exists("discord.exe"):
+            RPC.update(state="On the Main Menu", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
 
     scene.set3d()
 

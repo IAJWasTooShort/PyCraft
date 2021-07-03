@@ -3,6 +3,7 @@ from pygame.constants import SHOWN
 from game.Scene import Scene
 from game.blocks.CubeHandler import CubeHandler
 from game.blocks.droppedBlock import droppedBlock
+from game.Particles import Particles
 import math
 from random import randint
 
@@ -19,11 +20,12 @@ from game.blocks.BlockEvent import *
 from functions import roundPos, flatten, cube_vertices
 from game.blocks.DestroyBlock import DestroyBlock
 from settings import *
-
+from game.GUI.ModalWindow import ModalWindow
 
 class Player:
     def __init__(self, x=0, y=0, z=0, rotation=[0, 0], gl=None):
         print("Starting Player class...")
+
 
         self.position, self.rotation = [x, y, z], rotation
         self.speed = 0.03
@@ -68,8 +70,6 @@ class Player:
         else:
             if self.shift > 0:
                 self.shift -= 0.05
-
-
 
     def updatePosition(self):
         if self.gl.allowEvents["movePlayer"]:
