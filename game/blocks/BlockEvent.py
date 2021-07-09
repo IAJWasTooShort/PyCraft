@@ -1,3 +1,4 @@
+from functions import cube_vertices
 from game.blocks.CraftingTable import CraftingTable
 from game.world.Explosion import Explosion
 

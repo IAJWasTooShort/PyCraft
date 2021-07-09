@@ -47,11 +47,23 @@ Feel free to make a pull request with updates you have made.
 | TNT Timer             | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
 | Capitalise Item Names | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
 | Fall Damage           | <ul><li>[ ] </li></ul> | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
-| Make To-Do List       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
+| Make To-Do List       | <ul><li>[ ] </li></ul> | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
 |                       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
 |                       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
 
 
 
-## Known Bugs
+## Controls
 
+| Key   | Function       |
+| ----- | :------------: |
+| W     | Move Forward   |
+| S     | Move Backward  |
+| A     | Move Left      |
+| D     | Move Right     |
+| Space | Jump         |
+| E     | Open Inventory |
+| U     | Choose an Item |
+| P     | Get The Item   |
+| 1-9   | HotBar Slots   |
+| F3    | Debug (laggy)  |

@@ -208,6 +208,9 @@ class Inventory:
                 self.blocksLabel[i].y = 6
                 self.blocksLabel[i].text = str(self.inventory[i][1])
                 self.blocksLabel[i].draw()
+                if self.blocksLabel[i].text == "nocolor":
+                    self.blocksLabel[i].text == "test"
+                    self.blocksLabel[i].draw()
 
         for i in range(10):
             ay = 0

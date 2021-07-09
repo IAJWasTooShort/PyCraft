@@ -51,37 +51,37 @@ class worldGenerator:
             for z in range(zz, zz + CHUNK_SIZE[2]):
                 y = self.worldPerlin(x, z)
                 biomePerlin = self.perlinBiomes(x, z) * 3
-                activeBiome = Biomes(getBiomeByTemp(biomePerlin))
-                if activeBiome.biome == "mountains":
+                currentBiome = Biomes(getBiomeByTemp(biomePerlin))
+                if currentBiome.biome == "mountains":
                     if -3 < oldY - y < 3:
                         y = int((oldY + y) / 2)
-                if activeBiome.biome == "big_mountains":
+                if currentBiome.biome == "big_mountains":
                     if -3 < oldY - y < 3:
                         y *= 2
                         y = int((oldY + y) / 2)
                 oldY = y
                 y += sy
-                ch = 70
-                if activeBiome.biome in ["forest", "taiga"]:
+                ch = 70  
+                if currentBiome.biome in ["forest", "taiga"]:
                     ch = 50
 
                 spawnTree = random.randint(0, ch) == 20 and y > sy - 5
 
-                self.add((x, y, z), activeBiome.getBiomeGrass())
+                self.add((x, y, z), currentBiome.getBiomeGrass())
                 if self.gl.startPlayerPos == [0, -9000, 0] and not spawnTree:
                     self.gl.startPlayerPos = [x, y + 2, z]
                     self.gl.player.position = [x, y + 2, z]
                     self.gl.player.lastPlayerPosOnGround = [x, y + 2, z]
 
-                if spawnTree and activeBiome.biome in ["forest", "taiga"]:
+                if spawnTree and currentBiome.biome in ["forest", "taiga"]:
                     self.spawnTree(x, y, z)
 
                 self.add((x, 0, z), "bedrock")
                 for i in range(1, y):
                     if i > y - random.randint(5, 10):
-                        self.add((x, i, z), activeBiome.getBiomeDirt())
+                        self.add((x, i, z), currentBiome.getBiomeDirt())
                     else:
-                        self.add((x, i, z), activeBiome.getBiomeStone())
+                        self.add((x, i, z), currentBiome.getBiomeStone())
                     if i < sy - 20:
                         self.genOre(x, i, z)
 

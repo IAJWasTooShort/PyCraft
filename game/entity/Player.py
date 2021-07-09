@@ -1,3 +1,4 @@
+from re import S
 from numpy.core.shape_base import block
 from pygame.constants import SHOWN
 from game.Scene import Scene
@@ -49,6 +50,7 @@ class Player:
         self.playerFallY = 0
 
         self.kW, self.kS, self.kA, self.kD = 0, 0, 0, 0
+        self.item = ""
 
     def setCameraShake(self):
         if not self.canShake or self.shift > 0:
@@ -322,17 +324,10 @@ class Player:
         return self.position[2]
 
     def gm1(self):
-        self.inventory.addItem('diamond_sword')
-        self.inventory.addBlock('tnt')
-        #self.inventory.addBlock('crafting_table')
-        self.inventory.addBlock('fire')
-        #self.inventory.addBlock('ladder')
-        #self.inventory.addBlock('missing_tile')
-        #self.inventory.addBlock('cut_sandstone')
-        #self.inventory.addBlock('chiseled_sandstone')
-        self.inventory.addBlock('water')
-        self.inventory.addBlock('bedrock')
-        self.inventory.addBlock('lava')
+        if self.item == "":
+            self.inventory.addBlock("dirt")
+        else:
+            self.inventory.addBlock(self.item)
 
     def update(self):
         self.updatePosition()

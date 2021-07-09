@@ -50,12 +50,7 @@ pygame.DOUBLEBUF
 client_id = "851879525590630411"
 RPC = Presence(client_id)
 
-def IsRunning(WindowName):
-    try:
-        if win32ui.FindWindow(None, WindowName):
-            return True
-    except win32ui.error:
-        return False
+DiscordOpen = False
 
 
 import subprocess
@@ -65,8 +60,6 @@ def process_exists(process_name):
     output = subprocess.check_output(call).decode()
     last_line = output.strip().split('\r\n')[-1]
     return last_line.lower().startswith(process_name.lower())
-
-process_exists("discord.exe")
 
 if DiscordRP == True and process_exists("discord.exe"):
     RPC.connect()
@@ -91,7 +84,7 @@ def quitToMenu():
     drawInfoLabel(scene, "Quitting to main menu", xx=scene.WIDTH // 2, yy=scene.HEIGHT // 2,
                   style=[('', '')], size=12, anchor_x='center')
     pygame.display.flip()
-    clock.tick(MAX_FPS - 40)
+    clock.tick(MAX_FPS)
 
     PAUSE = True
     IN_MENU = True
@@ -133,6 +126,10 @@ def startNewGame():
     sound.startMusic(True)
     scene.worldGen = worldGenerator(scene, translateSeed(seedEditArea.text))
     mainFunction = genWorld
+    if DiscordRP == True:
+            if process_exists("discord.exe"):
+                RPC.update(state="In Game", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
+
 
 
 def pause():
@@ -182,7 +179,7 @@ def drawSettingsMenu(mc):
     sound.volume = soundVolumeSliderBox.val / 100
 
     pygame.display.flip()
-    clock.tick(MAX_FPS - 40)
+    clock.tick(MAX_FPS)
 
 def drawIGSettingsMenu(mc):
     scene.set2d()
@@ -209,7 +206,7 @@ def drawIGSettingsMenu(mc):
     sound.volume = soundVolumeSliderBox.val / 100
 
     pygame.display.flip()
-    clock.tick(MAX_FPS - 40)
+    clock.tick(MAX_FPS)
 
 def drawDeathScreen(mc):
     bg = gui.GUI_TEXTURES["red"]
@@ -234,7 +231,7 @@ def drawDeathScreen(mc):
     quitWorldButton.update(mp, mc)
     
     pygame.display.flip()
-    clock.tick(MAX_FPS - 40)
+    clock.tick(MAX_FPS)
 
 def pauseMenu(mc):
     bg = gui.GUI_TEXTURES["black"]
@@ -264,7 +261,7 @@ def pauseMenu(mc):
     quitWorldButton.update(mp, mc)
     
     pygame.display.flip()
-    clock.tick(MAX_FPS - 40)
+    clock.tick(MAX_FPS)
 
 def genWorld(mc):
     global IN_MENU, PAUSE, resizeEvent
@@ -283,10 +280,6 @@ def genWorld(mc):
         IN_MENU = False
         PAUSE = False
 
-    if DiscordRP == True:
-        if process_exists("discord.exe"):
-            RPC.update(state="In Game", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
-
 
     proc = round((scene.worldGen.start - len(scene.worldGen.queue)) * 100 / chunkCnt)
     drawInfoLabel(scene, "Generating world", xx=scene.WIDTH // 2, yy=scene.HEIGHT // 2, style=[('', '')],
@@ -294,8 +287,9 @@ def genWorld(mc):
     drawInfoLabel(scene, f"Building terrain", xx=scene.WIDTH // 2, yy=scene.HEIGHT // 2 - 39,
                   style=[('', '')], size=12, anchor_x='center')
 
+
     pygame.display.flip()
-    clock.tick(MAX_FPS - 40)
+    clock.tick(MAX_FPS)
 
 def drawMainMenu(mc):
     global mainMenuRotation, IN_MENU, PAUSE
@@ -356,7 +350,7 @@ def drawMainMenu(mc):
     glPopMatrix()
     
     pygame.display.flip()
-    clock.tick(MAX_FPS - 40)
+    clock.tick(MAX_FPS)
 
     if mainMenuRotation[0] < 25:
         mainMenuRotation[2] = False
@@ -679,6 +673,8 @@ while True:
                         pause()
                     if event.key == pygame.K_e:
                         player.inventory.showWindow()
+                    if event.key == pygame.K_u:
+                        player.item = input("Item: ")
                     if event.key == pygame.K_1:
                         player.inventory.activeInventory = 0
                     if event.key == pygame.K_2:
