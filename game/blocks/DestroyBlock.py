@@ -1,3 +1,4 @@
+import gc
 import os
 
 import pyglet
@@ -20,6 +21,7 @@ class DestroyBlock:
                 pyglet.graphics.TextureGroup(pyglet.image.load("textures/blocks/block_destroy/" + i)
                                              .get_mipmapped_texture())
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+        gc.collect
 
     def drawDestroy(self, ox, oy, oz):
         if self.destroyStage == -1:
@@ -56,6 +58,7 @@ class DestroyBlock:
 
         self.gl.stuffBatch.add(4, mode, self.textures[stg], ('v3f', vertexes[5]),
                                tex_coords)  # top
+        gc.collect
 
     def destroy(self, blockName, blockByVec):
         if self.destroyStage == -1 or blockByVec[0] != self.destroyPos:
@@ -84,3 +87,4 @@ class DestroyBlock:
             #self.gl.particles.addParticle(self.gl.cubes.cubes[blockByVec[0]].p, self.gl.cubes.cubes[blockByVec[0]],
             #                              direction="down")
             self.gl.cubes.remove(blockByVec[0])
+        gc.collect

@@ -1,3 +1,4 @@
+import gc
 from game.models.Model import Model
 
 
@@ -11,3 +12,4 @@ class Entity:
 
     def update(self):
         self.model.drawModel(self.position, self.rotation)
+        gc.collect

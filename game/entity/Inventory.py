@@ -1,3 +1,4 @@
+import gc
 import math
 from random import randint
 
@@ -72,9 +73,11 @@ class Inventory:
             if x > 304:
                 x = 16
                 y += 36
+        gc.collect
 
     def showWindow(self):
         self.window.show()
+        gc.collect
 
     def windowClickEvent(self, button, cell):
         if button[0]:
@@ -99,6 +102,7 @@ class Inventory:
                     self.inventory[cell][0] = self.draggingItem[0]
                     self.inventory[cell][1] += 1
                     self.draggingItem[1] -= 1
+        gc.collect
 
     def updateWindow(self, win, mousePos):
         craftResult = getCraftingItem([
@@ -145,6 +149,7 @@ class Inventory:
                                         font_size=10,
                                         x=lx, y=ly)
                 lbl.draw()
+        gc.collect
 
     def addBlock(self, name):
         ext = False
@@ -165,6 +170,7 @@ class Inventory:
             if self.inventory[self.activeInventory][1] == 0:
                 sech = self.activeInventory
             self.inventory[sech] = [name, 1]
+        gc.collect
 
     def addItem(self, name):
         ext = False
@@ -185,6 +191,7 @@ class Inventory:
             if self.inventory[self.activeInventory][1] == 0:
                 sech = self.activeInventory
             self.inventory[sech] = [name, 1]
+        gc.collect
 
     def draw(self):
         inventory = self.gl.gui.GUI_TEXTURES["inventory"]
@@ -249,3 +256,4 @@ class Inventory:
             if hrt == fullheart:
                 x += heartbg.width - 1
                 ch += 1
+        gc.collect

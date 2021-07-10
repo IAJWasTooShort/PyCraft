@@ -1,3 +1,4 @@
+import gc
 import pygame
 from OpenGL.GL import *
 from functions import checkHover
@@ -20,6 +21,7 @@ class ModalWindow:
 
     def setWindow(self, win):
         self.window = win
+        gc.collect
 
     def destroyWindow(self):
         self.gl.allowEvents["keyboardAndMouse"] = True
@@ -28,6 +30,7 @@ class ModalWindow:
         self.gl.allowEvents["showCrosshair"] = True
 
         self.gl.updateEvents.pop(self.windowId)
+        gc.collect
 
         
 
@@ -69,11 +72,15 @@ class ModalWindow:
         for i in self.updateFunctions:
             i(win, mp)
 
+        gc.collect
+
         key = pygame.key.get_pressed()
         if key[pygame.K_ESCAPE]:
             self.destroyWindow()
             return
 
+
     def show(self):
         self.gl.updateEvents.append(self.drawWindow)
         self.windowId = len(self.gl.updateEvents) - 1
+        gc.collect

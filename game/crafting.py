@@ -9,5 +9,5 @@ def getCraftingItem(objects, tableType=False):
 
         if ["log_oak", "", "", ""] == objects:
             print("log")
-
+    
     return item

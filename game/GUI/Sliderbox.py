@@ -40,3 +40,4 @@ class Sliderbox:
         self.slider.blit(self.slider.x, self.gl.HEIGHT - self.y - self.bg.height)
         drawInfoLabel(self.gl, self.text, xx=self.x, yy=self.gl.HEIGHT - self.y + 15, style=[('', '')],
                       size=12)
+        gc.collect

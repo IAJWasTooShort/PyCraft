@@ -1,3 +1,4 @@
+import gc
 from re import S
 from numpy.core.shape_base import block
 from pygame.constants import SHOWN
@@ -64,6 +65,7 @@ class Player:
             self.cameraShake[0] += 0.007
             if self.cameraShake[0] > 0.1:
                 self.cameraShake[1] = False
+        gc.collect
 
     def setShift(self, b):
         if b:
@@ -72,6 +74,9 @@ class Player:
         else:
             if self.shift > 0:
                 self.shift -= 0.05
+
+    #def cameraType(self):
+    #    self.cameraType
 
     def updatePosition(self):
         if self.gl.allowEvents["movePlayer"]:
@@ -164,6 +169,7 @@ class Player:
         glTranslatef(-self.position[0],
                      -self.position[1] + self.shift + self.cameraShake[0],
                      -self.position[2])
+        gc.collect
 
     def jump(self):
         if not self.dy:
@@ -202,7 +208,9 @@ class Player:
             if 3 < self.playerFallY:
                 # self.gl.sound.playSound("oof", 0.8)
                 self.hp -= 1
-                if self.playerFallY < 10:
+                if self.playerFallY <= 4:
+                    self.hp -= 2
+                elif self.playerFallY < 10:
                     self.hp -= 3
                 elif self.playerFallY < 16:
                     self.hp -= 5
@@ -224,6 +232,7 @@ class Player:
                                           direction="down",
                                           count=10)
         self.position = col
+        gc.collect
 
     def dead(self):
         self.playerDead = True
@@ -277,6 +286,7 @@ class Player:
                     self.gl.cubes.add(blockByVec, self.inventory.inventory[self.inventory.activeInventory][0], now=True)
                     self.gl.blockSound.playBlockSound(self.gl.cubes.cubes[blockByVec].name)
                     self.inventory.inventory[self.inventory.activeInventory][1] -= 1
+        gc.collect
 
     def collide(self, pos):
         if -90 > pos[1] > -9000:
@@ -306,6 +316,7 @@ class Player:
                         if face[1]:
                             self.dy = 0
                         break
+        gc.collect
         return tuple(p)
 
     def get_sight_vector(self):
@@ -331,3 +342,4 @@ class Player:
 
     def update(self):
         self.updatePosition()
+        gc.collect

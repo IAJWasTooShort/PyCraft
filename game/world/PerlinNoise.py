@@ -1,3 +1,4 @@
+import gc
 import random
 import math
 import threading
@@ -29,6 +30,7 @@ class PerlinNoise(threading.Thread):
         u = y if h & 8 else x
         v = (x if h == 12 or h == 14 else z) if h & 12 else y
         return (u if h & 1 else -u) + (v if h & 2 else -v)
+        gc.collect
 
     def noise(self, x, y, z=0):
         p, fade, lerp, grad = self.p, self.fade, self.lerp, self.grad
@@ -44,6 +46,7 @@ class PerlinNoise(threading.Thread):
         B = p[X + 1] + Y
         BA = p[B] + Z
         BB = p[B + 1] + Z
+        gc.collect
         return lerp(w, lerp(v, lerp(u, grad(p[AA], x, y, z), grad(p[BA], x - 1, y, z)),
                             lerp(u, grad(p[AB], x, y - 1, z), grad(p[BB], x - 1, y - 1, z))),
                     lerp(v, lerp(u, grad(p[AA + 1], x, y, z - 1), grad(p[BA + 1], x - 1, y, z - 1)),

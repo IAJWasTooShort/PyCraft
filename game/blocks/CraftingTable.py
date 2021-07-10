@@ -1,3 +1,4 @@
+import gc
 from game.GUI.ModalWindow import ModalWindow
 from settings import *
 
@@ -56,3 +57,4 @@ class CraftingTable:
                 by -= 72
             if by == -108:
                 by -= 9
+        gc.collect

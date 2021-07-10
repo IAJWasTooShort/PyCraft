@@ -14,6 +14,7 @@ class Button:
 
     def setEvent(self, event):
         self.event = event
+        gc.collect
 
     def update(self, mp, mc):
         self.button = self.gl.gui.GUI_TEXTURES["button_bg"]
@@ -30,3 +31,4 @@ class Button:
         self.button.blit(self.x, self.gl.HEIGHT - self.y - self.button.height)
         drawInfoLabel(self.gl, self.text, xx=self.gl.WIDTH // 2, yy=self.gl.HEIGHT - self.y - 25, style=[('', '')],
                       size=12, anchor_x='center')
+        gc.collect

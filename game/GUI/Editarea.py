@@ -64,3 +64,4 @@ class Editarea:
             text = pyglet.text.Label(self.text, font_name='Minecraft Rus')
             drawInfoLabel(self.gl, "_", xx=self.x + 12 + text.content_width, yy=self.gl.HEIGHT - self.y - 25,
                           style=[('', '')], size=12, opacity=self.curFade[0])
+        gc.collect

@@ -4,6 +4,7 @@ from collections import deque
 from game.world.Biomes import Biomes, getBiomeByTemp
 from game.world.PerlinNoise import PerlinNoise
 from settings import *
+import gc
 
 
 class worldGenerator:
@@ -42,6 +43,7 @@ class worldGenerator:
             while self.loading:
                 p, t = self.loading.popleft()
                 self.gl.cubes.updateCube(self.gl.cubes.cubes[p])
+        gc.collect
 
     def gen(self, xx, zz):
         sy = CHUNK_SIZE[1]
@@ -84,6 +86,7 @@ class worldGenerator:
                         self.add((x, i, z), currentBiome.getBiomeStone())
                     if i < sy - 20:
                         self.genOre(x, i, z)
+        gc.collect
 
     def genOre(self, x, y, z):
         if random.randint(0, 5753) != random.randint(0, 1575):
@@ -96,6 +99,7 @@ class worldGenerator:
             for yi in range(r1):
                 for zi in range(r2):
                     self.add((x + xi, yi + y, zi + z), ore)
+        gc.collect
 
     def getOreByY(self, y):
         if y < 20:
@@ -117,6 +121,7 @@ class worldGenerator:
         if random.randint(0, 180) == 54:
             return "gravel"
         return "dirt"
+        gc.collect
 
     def spawnTree(self, x, y, z):
         treeHeight = random.randint(5, 7)
@@ -139,3 +144,4 @@ class worldGenerator:
                         self.add((x + j, y + i, z + k), 'leaves_oak')
                     cl += 1
         self.add((x, y + treeHeight + 1, z), 'leaves_oak')
+        gc.collect

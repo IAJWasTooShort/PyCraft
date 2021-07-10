@@ -1,3 +1,6 @@
+import gc
+
+
 all_biomes = ["forest", "desert", "ocean", "taiga", "mountains", "big_mountains"]
 
 
@@ -29,6 +32,7 @@ class Biomes:
             return "grass"
         if self.biome == "big_mountains":
             return "stone"
+        gc.collect
 
     def getBiomePlant(self):
         if self.biome == "desert":
@@ -46,6 +50,7 @@ class Biomes:
             return "dirt"
         if self.biome == "ocean":
             return "water"
+        gc.collect
 
     def getBiomeStone(self):
         if self.biome == "desert":
@@ -56,3 +61,4 @@ class Biomes:
             return "water"
         if self.biome == "big_mountains":
             return "stone"
+        gc.collect

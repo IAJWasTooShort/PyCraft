@@ -1,3 +1,4 @@
+import gc
 from random import randint
 
 import pygame
@@ -35,15 +36,18 @@ class Sound:
                 if i == musicNum:
                     continue
                 self.musicPlayer.queue(self.MENU_MUSIC[i])
+        gc.collect
 
     def playSound(self, name, volume):
         channel = self.SOUNDS[name].play()
         channel.set_volume(volume)
+        gc.collect
 
     def playGuiSound(self, st):
         if st == "click":
             channel = self.SOUNDS["GUI"]["click_stereo"][0].play()
             channel.set_volume(self.volume)
+        gc.collect
 
     def playMusic(self):
         if self.music_already_playing:
@@ -52,3 +56,4 @@ class Sound:
             self.music_already_playing = True
             self.musicPlayer.play()
             self.musicPlayer.set_volume(self.volume)
+        gc.collect

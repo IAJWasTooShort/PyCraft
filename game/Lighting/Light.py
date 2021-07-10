@@ -1,3 +1,4 @@
+import gc
 from functions import roundPos
 
 
@@ -33,6 +34,7 @@ class Light:
 
     def addLightSource(self, x, y, z):
         self.lightSources.append([x, y, z])
+        gc.collect
 
     def update(self):
         if self.oldLightSources == self.lightSources:
@@ -87,3 +89,4 @@ class Light:
                                 'top': ('c3f', (clr,) * 12),
                             })
                 lightVal -= 0.15
+        gc.collect

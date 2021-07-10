@@ -1,3 +1,4 @@
+import gc
 from random import randint
 
 
@@ -20,3 +21,4 @@ class Explosion:
                             nexp.run()
 
                     self.gl.cubes.remove((nx, ny, nz))
+        gc.collect

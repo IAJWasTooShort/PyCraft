@@ -1,3 +1,4 @@
+import gc
 from random import choice
 from OpenGL.GL import *
 from functions import *
@@ -21,6 +22,7 @@ class Particles:
             dx, dy, dz = choice(numbers), choice(numbers), choice(numbers)
             ps = randint(4, 8) / 1000  # 0.005
             self.particles.append([list(p), cubeClass, randint(1, 4) / 10, [dx, dy, dz], .001, direction, 0.02, ps])
+        gc.collect
 
     def drawParticles(self):
         if not self.particles:
@@ -85,3 +87,4 @@ class Particles:
 
             i[2] -= 0.009
             self.particles[e] = i
+        gc.collect

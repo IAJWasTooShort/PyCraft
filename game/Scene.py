@@ -21,6 +21,8 @@ from game.blocks.CubeHandler import CubeHandler
 from pypresence import Presence
 import time
 
+import gc
+gc.enable()
 
 class Scene:
     def __init__(self):
@@ -65,6 +67,7 @@ class Scene:
         self.drawCounter = 0
         self.genTime = 1
         self.startPlayerPos = [0, -9000, 0]
+        gc.collect
 
     def loadPanoramaTextures(self):
         print("Loading panorama...")
@@ -75,11 +78,13 @@ class Scene:
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+        gc.collect
 
     def vertexList(self):
         x, y, w, h = self.WIDTH / 2, self.HEIGHT / 2, self.WIDTH, self.HEIGHT
         self.reticle = pyglet.graphics.vertex_list(4, ('v2f', (x - 10, y, x + 10, y, x, y - 10, x, y + 10)),
                                                    ('c3f', (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)))
+        gc.collect
 
     def startScene(self):
         print("Started OpenGL scene...")
@@ -114,11 +119,13 @@ class Scene:
                                  ('diamond_sword', 'nocolor'), self)
 
         self.set3d()
+        gc.collect
 
     def set2d(self):
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
         gluOrtho2D(0, self.WIDTH, 0, self.HEIGHT)
+        gc.collect
 
     def set3d(self):
 
@@ -127,6 +134,7 @@ class Scene:
         gluPerspective(self.fov, (self.WIDTH / self.HEIGHT), 0.1, RENDER_DISTANCE)
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
+        gc.collect
 
     def resizeCGL(self, w, h, changeRes=True):
         if changeRes:
@@ -134,6 +142,7 @@ class Scene:
             self.HEIGHT = h
         self.vertexList()
         glViewport(0, 0, w, h)
+        gc.collect
 
     def drawPanorama(self):
         # self.resizeCGL(256, 256, changeRes=False)
@@ -173,12 +182,14 @@ class Scene:
 
         # glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, 256, 256)
         # self.resizeCGL(self.WIDTH, self.HEIGHT, changeRes=False)
+        gc.collect
 
     def genWorld(self):
         self.drawCounter += 1
         if self.drawCounter > self.genTime:
             self.drawCounter = 0
             self.worldGen.genChunk(self.player)
+        gc.collect
         
 
     def updateScene(self):
@@ -238,6 +249,7 @@ class Scene:
 
         for i in self.updateEvents:
             i()
+        gc.collect
 
     def draw(self):
 
@@ -251,3 +263,4 @@ class Scene:
 
         self.stuffBatch.draw()
         self.stuffBatch = pyglet.graphics.Batch()
+        gc.collect

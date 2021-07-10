@@ -1,3 +1,4 @@
+import gc
 from game.world.worldGenerator import worldGenerator
 from OpenGL.GL import *
 
@@ -83,6 +84,7 @@ class CubeHandler:
                         cube.faces[f[i]].delete()
                         cube.faces[f[i]] = show(v[i], cube.t[i], f[i], clrC=customColor)
                     cube.color[f[i]] = customColor[f[i]]
+        gc.collect
 
     def set_adj(self, cube, adj, state):
         x, y, z = cube.p
@@ -121,6 +123,7 @@ class CubeHandler:
 
         if now:
             self.updateCube(cube)
+        gc.collect
 
     def remove(self, p):
         if p not in self.cubes:
@@ -141,3 +144,4 @@ class CubeHandler:
             if adj in self.cubes:
                 self.set_adj(self.cubes[adj], cube.p, True)
                 self.updateCube(self.cubes[adj])
+        gc.collect

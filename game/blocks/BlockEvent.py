@@ -1,3 +1,4 @@
+import gc
 from functions import cube_vertices
 from game.blocks.CraftingTable import CraftingTable
 from game.world.Explosion import Explosion
@@ -11,6 +12,7 @@ def openBlockInventory(playerClass, blockClass, gl):
         gl.blockSound.playBoomSound()
         exp = Explosion(gl, blockClass.p, 5, blockClass)
         exp.run()
+    gc.collect
 
 
 def canOpenBlock(playerClass, blockClass, gl):

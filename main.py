@@ -1,7 +1,6 @@
 from game.items.ItemHandler import ItemHandler
 from numpy.core.shape_base import block
 from game.blocks.droppedBlock import droppedBlock
-import gc
 import math
 import os
 from random import randint
@@ -27,11 +26,10 @@ from game.world.Biomes import getBiomeByTemp
 from game.world.worldGenerator import worldGenerator
 from settings import *
 
-import win32ui
 
 import gc
 gc.enable()
-#gc.set_debug(gc.DEBUG_LEAK)
+
 
 working_dir = os.path.dirname(os.path.realpath(__file__))
 image_dir = os.path.join(working_dir, 'textures')
@@ -45,13 +43,10 @@ programIcon = pygame.image.load('textures\pycraft-32.png')
 
 pygame.display.set_icon(programIcon)
 
-pygame.DOUBLEBUF
-
 client_id = "851879525590630411"
 RPC = Presence(client_id)
 
 DiscordOpen = False
-
 
 import subprocess
 
@@ -71,6 +66,7 @@ def respawn():
     player.playerDead = False
     player.position = scene.startPlayerPos
     player.lastPlayerPosOnGround = scene.startPlayerPos
+    gc.collect
 
 def quitToMenu():
     global PAUSE, IN_MENU, mainFunction
@@ -101,24 +97,28 @@ def quitToMenu():
     player.hp = -1
     player.playerDead = False
 
-    gc.collect()
     mainFunction = drawMainMenu
+    gc.collect
 
 def showSettings():
     global mainFunction
     mainFunction = drawSettingsMenu
+    gc.collect
 
 def showSettingsIG():
     global mainFunction
     mainfunction = drawIGSettingsMenu
+    gc.collect
 
 def closeSettings():
     global mainFunction
     mainFunction = drawMainMenu
+    gc.collect
 
 def closeIGSettings():
     global mainFunction
     mainFunction = pauseMenu
+    gc.collect
 
 def startNewGame():
     global mainFunction
@@ -129,7 +129,7 @@ def startNewGame():
     if DiscordRP == True:
             if process_exists("discord.exe"):
                 RPC.update(state="In Game", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
-
+    gc.collect
 
 
 def pause():
@@ -138,6 +138,7 @@ def pause():
     scene.allowEvents["movePlayer"] = True
     scene.allowEvents["keyboardAndMouse"] = True
     mainFunction = pauseMenu
+    gc.collect
 
 
 def deathScreen():
@@ -146,6 +147,7 @@ def deathScreen():
     scene.allowEvents["movePlayer"] = True
     scene.allowEvents["keyboardAndMouse"] = True
     mainFunction = drawDeathScreen
+    gc.collect
 
 
 def drawSettingsMenu(mc):
@@ -180,6 +182,7 @@ def drawSettingsMenu(mc):
 
     pygame.display.flip()
     clock.tick(MAX_FPS)
+    gc.collect
 
 def drawIGSettingsMenu(mc):
     scene.set2d()
@@ -207,6 +210,7 @@ def drawIGSettingsMenu(mc):
 
     pygame.display.flip()
     clock.tick(MAX_FPS)
+    gc.collect
 
 def drawDeathScreen(mc):
     bg = gui.GUI_TEXTURES["red"]
@@ -229,9 +233,10 @@ def drawDeathScreen(mc):
     quitWorldButton.x = scene.WIDTH // 2 - (quitButton.button.width // 2)
     quitWorldButton.y = scene.HEIGHT // 2 - (quitButton.button.height // 2)
     quitWorldButton.update(mp, mc)
-    
+
     pygame.display.flip()
     clock.tick(MAX_FPS)
+    gc.collect
 
 def pauseMenu(mc):
     bg = gui.GUI_TEXTURES["black"]
@@ -262,6 +267,7 @@ def pauseMenu(mc):
     
     pygame.display.flip()
     clock.tick(MAX_FPS)
+    gc.collect
 
 def genWorld(mc):
     global IN_MENU, PAUSE, resizeEvent
@@ -290,6 +296,7 @@ def genWorld(mc):
 
     pygame.display.flip()
     clock.tick(MAX_FPS)
+    gc.collect
 
 def drawMainMenu(mc):
     global mainMenuRotation, IN_MENU, PAUSE
@@ -297,11 +304,14 @@ def drawMainMenu(mc):
     glFogf(GL_FOG_START, 0)
     glFogf(GL_FOG_END, 1000)
 
-
-    if DiscordRP == True:
-        if process_exists("discord.exe"):
-            RPC.update(state="On the Main Menu", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
-
+    DiscordTried = 0
+    while DiscordTried == 0:
+        if DiscordRP == True:
+            if process_exists("discord.exe"):
+                RPC.update(state="On the Main Menu", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
+                DiscordTried = 1
+            else:
+                DiscordTried = 1
     scene.set3d()
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -362,6 +372,7 @@ def drawMainMenu(mc):
     else:
         mainMenuRotation[0] += 0.008
     mainMenuRotation[1] += 0.02
+    gc.collect
 
 print("Loading the game...")
 
@@ -628,6 +639,9 @@ mainMenuRotation = [50, 180, True]
 
 mainFunction = drawMainMenu
 
+gc.collect
+
+
 while True:
 
     if scene.allowEvents["keyboardAndMouse"] and not PAUSE:
@@ -675,6 +689,8 @@ while True:
                         player.inventory.showWindow()
                     if event.key == pygame.K_u:
                         player.item = input("Item: ")
+                    if event.key == pygame.K_o:
+                        player.hp = 20
                     if event.key == pygame.K_1:
                         player.inventory.activeInventory = 0
                     if event.key == pygame.K_2:
@@ -769,3 +785,4 @@ while True:
         gui.update()
 
         mainFunction(mbclicked)
+    gc.collect
