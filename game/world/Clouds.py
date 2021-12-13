@@ -26,4 +26,4 @@ class Clouds:
             self.xz += 0.01
         else:
             self.xz -= 0.01
-        gc.collect
+        

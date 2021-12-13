@@ -60,7 +60,7 @@ def load_textures(self):
             if n in self.inventory_textures:
                 self.inventory_textures[n].width = 22
                 self.inventory_textures[n].height = 22
-    gc.collect
+    
 
 
 def translateSeed(seed):
@@ -71,14 +71,14 @@ def translateSeed(seed):
         res += str(ord(i))
     while len(res) < 10:
         res += res[:-1]
-    gc.collect
+    
     return int(res[0:10])
 
 
 def cube_vertices(pos, n=0.5):
     x, y, z = pos
     v = tuple((x + X, y + Y, z + Z) for X in (-n, n) for Y in (-n, n) for Z in (-n, n))
-    gc.collect
+    
     return tuple(tuple(k for j in i for k in v[j]) for i in
                  ((0, 1, 3, 2), (5, 4, 6, 7), (0, 4, 5, 1), (3, 7, 6, 2), (4, 0, 2, 6), (1, 5, 7, 3)))
 
@@ -101,7 +101,7 @@ def getSum(s):
 
 def adjacent(x, y, z):
     for p in ((x - 1, y, z), (x + 1, y, z), (x, y - 1, z), (x, y + 1, z), (x, y, z - 1), (x, y, z + 1)): yield p
-    gc.collect
+    
 
 
 def drawInfoLabel(gl, text, xx=0, yy=0, style=None, size=15, anchor_x='left', anchor_y='baseline', opacity=1, rotate=0,
@@ -150,7 +150,7 @@ def drawInfoLabel(gl, text, xx=0, yy=0, style=None, size=15, anchor_x='left', an
         if rotate:
             glRotatef(-rotate, 0.0, 0.0, 1.0)
         y -= 21
-    gc.collect
+    
 
 
 def getElpsTime():

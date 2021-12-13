@@ -73,11 +73,11 @@ class Inventory:
             if x > 304:
                 x = 16
                 y += 36
-        gc.collect
+        
 
     def showWindow(self):
         self.window.show()
-        gc.collect
+        
 
     def windowClickEvent(self, button, cell):
         if button[0]:
@@ -102,7 +102,7 @@ class Inventory:
                     self.inventory[cell][0] = self.draggingItem[0]
                     self.inventory[cell][1] += 1
                     self.draggingItem[1] -= 1
-        gc.collect
+        
 
     def updateWindow(self, win, mousePos):
         craftResult = getCraftingItem([
@@ -149,7 +149,7 @@ class Inventory:
                                         font_size=10,
                                         x=lx, y=ly)
                 lbl.draw()
-        gc.collect
+        
 
     def addBlock(self, name):
         ext = False
@@ -170,7 +170,7 @@ class Inventory:
             if self.inventory[self.activeInventory][1] == 0:
                 sech = self.activeInventory
             self.inventory[sech] = [name, 1]
-        gc.collect
+        
 
     def addItem(self, name):
         ext = False
@@ -191,7 +191,7 @@ class Inventory:
             if self.inventory[self.activeInventory][1] == 0:
                 sech = self.activeInventory
             self.inventory[sech] = [name, 1]
-        gc.collect
+        
 
     def draw(self):
         inventory = self.gl.gui.GUI_TEXTURES["inventory"]
@@ -214,10 +214,11 @@ class Inventory:
                 self.blocksLabel[i].x = (self.gl.WIDTH // 2 - (inventory.width // 2)) + (40 * i) + 22
                 self.blocksLabel[i].y = 6
                 self.blocksLabel[i].text = str(self.inventory[i][1])
-                self.blocksLabel[i].draw()
-                if self.blocksLabel[i].text == "nocolor":
+                if self.blocksLabel[i] == "nocolor":
                     self.blocksLabel[i].text == "test"
                     self.blocksLabel[i].draw()
+                self.blocksLabel[i].draw()
+                
 
         for i in range(10):
             ay = 0
@@ -256,4 +257,4 @@ class Inventory:
             if hrt == fullheart:
                 x += heartbg.width - 1
                 ch += 1
-        gc.collect
+        

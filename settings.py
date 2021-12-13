@@ -14,7 +14,7 @@ HEIGHT = 566
 MAX_FPS = 100
 PAUSE = True
 IN_MENU = True
-VERSION = "Alpha 0.1.4 Textures Test"
+VERSION = "Alpha 0.1.5 Memory Fix"
 clock = pygame.time.Clock()
 
 DiscordRP = True

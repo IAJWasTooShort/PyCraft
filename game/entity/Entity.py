@@ -12,4 +12,4 @@ class Entity:
 
     def update(self):
         self.model.drawModel(self.position, self.rotation)
-        gc.collect
+        

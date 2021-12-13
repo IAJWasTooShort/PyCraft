@@ -12,7 +12,7 @@ def openBlockInventory(playerClass, blockClass, gl):
         gl.blockSound.playBoomSound()
         exp = Explosion(gl, blockClass.p, 5, blockClass)
         exp.run()
-    gc.collect
+    
 
 
 def canOpenBlock(playerClass, blockClass, gl):

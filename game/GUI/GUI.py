@@ -27,7 +27,7 @@ class GUI:
         self.lbl.text = text
         self.shadow_lbl.text = text
         self.lopacity = 255
-        gc.collect
+        
 
     def update(self):
         self.shadow_lbl.x = self.gl.WIDTH // 2 + 2
@@ -43,8 +43,8 @@ class GUI:
 
         for i in self.shows.values():
             i[0].blit(*i[1])
-        gc.collect
+        
 
     def addGuiElement(self, image, pos):
         self.shows[image] = [self.GUI_TEXTURES[image], pos]
-        gc.collect
+        

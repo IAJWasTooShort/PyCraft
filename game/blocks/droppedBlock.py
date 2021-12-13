@@ -13,7 +13,7 @@ class droppedBlock:
 
     def addBlock(self, coords, name, dr=True):
         self.blocks[len(self.blocks)] = [coords, name, randint(0, 2) / 10, [0, "-"], 0, dr]
-        gc.collect
+        
 
     def update(self):
         cpy = self.blocks.copy().items()
@@ -108,4 +108,4 @@ class droppedBlock:
                 yy -= 0.1
             self.blocks[i[0]][0] = (i[1][0][0], yy, i[1][0][2])
             self.blocks[i[0]][4] = i[1][4]
-        gc.collect
+        

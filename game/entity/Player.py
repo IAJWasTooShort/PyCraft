@@ -65,7 +65,7 @@ class Player:
             self.cameraShake[0] += 0.007
             if self.cameraShake[0] > 0.1:
                 self.cameraShake[1] = False
-        gc.collect
+        
 
     def setShift(self, b):
         if b:
@@ -169,7 +169,7 @@ class Player:
         glTranslatef(-self.position[0],
                      -self.position[1] + self.shift + self.cameraShake[0],
                      -self.position[2])
-        gc.collect
+        
 
     def jump(self):
         if not self.dy:
@@ -232,7 +232,7 @@ class Player:
                                           direction="down",
                                           count=10)
         self.position = col
-        gc.collect
+        
 
     def dead(self):
         self.playerDead = True
@@ -286,7 +286,7 @@ class Player:
                     self.gl.cubes.add(blockByVec, self.inventory.inventory[self.inventory.activeInventory][0], now=True)
                     self.gl.blockSound.playBlockSound(self.gl.cubes.cubes[blockByVec].name)
                     self.inventory.inventory[self.inventory.activeInventory][1] -= 1
-        gc.collect
+        
 
     def collide(self, pos):
         if -90 > pos[1] > -9000:
@@ -316,7 +316,7 @@ class Player:
                         if face[1]:
                             self.dy = 0
                         break
-        gc.collect
+        
         return tuple(p)
 
     def get_sight_vector(self):
@@ -342,4 +342,4 @@ class Player:
 
     def update(self):
         self.updatePosition()
-        gc.collect
+        

@@ -41,7 +41,7 @@ class BlockSound:
 
         chnl = sound.play()
         chnl.set_volume(self.gl.sound.volume)
-        gc.collect
+        
 
     def playStepSound(self, blockName, custom=300):
         self.cntr += 1
@@ -52,24 +52,24 @@ class BlockSound:
         bl = len(self.gl.sound.BLOCKS_SOUND["step"][blName])
         chnl = self.gl.sound.BLOCKS_SOUND["step"][blName][randint(0, bl - 1)].play()
         chnl.set_volume(self.gl.sound.volume)
-        gc.collect
+        
 
     def playFireBurnSound(self):
         bl = len(self.gl.sound.BLOCKS_SOUND["fireburn"])
         chnl = self.gl.sound.BLOCKS_SOUND["fireburn"][randint(0, bl - 1)].play()
         chnl.set_volume(self.gl.sound.volume)
-        gc.collect
+        
 
     def playFireCrackSound(self):
         chnl = self.gl.sound.BLOCKS_SOUND["firecrack"].play()
         chnl.set_volume(self.gl.sound.volume)
-        gc.collect
+        
 
     def playBoomSound(self):
         bl = len(self.gl.sound.BLOCKS_SOUND["explode"])
         chnl = self.gl.sound.BLOCKS_SOUND["explode"][randint(0, bl - 1)].play()
         chnl.set_volume(self.gl.sound.volume)
-        gc.collect
+        
 
     def playBlockSound(self, blockName):
         blName = self.getBlockSound(blockName)
@@ -77,11 +77,11 @@ class BlockSound:
         bl = len(self.gl.sound.BLOCKS_SOUND["dig"][blName])
         chnl = self.gl.sound.BLOCKS_SOUND["dig"][blName][randint(0, bl - 1)].play()
         chnl.set_volume(self.gl.sound.volume)
-        gc.collect
+        
 
     def playPickUpSound(self):
         if not self.pickUpAlreadyPlayed:
             chnl = self.gl.sound.BLOCKS_SOUND["pickUp"].play()
             chnl.set_volume(self.gl.sound.volume)
             self.pickUpAlreadyPlayed = True
-        gc.collect
+        

@@ -57,4 +57,4 @@ class CraftingTable:
                 by -= 72
             if by == -108:
                 by -= 9
-        gc.collect
+        

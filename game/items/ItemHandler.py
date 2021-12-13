@@ -52,7 +52,7 @@ class ItemHandler:
         else:
             clr = clrC[i]
 
-        gc.collect
+        
         return self.opaque.add(4, GL_QUADS, t, ('v3f', v), ('t2f', (0, 0, 1, 0, 1, 1, 0, 1)), clr)
 
 
@@ -66,10 +66,11 @@ class ItemHandler:
         else:
             if item.p in self.collidable:
                 del self.collidable[item.p]
+                
             return
 
         show = self.show
-        gc.collect
+        
 
     def set_adj(self, item, adj, state):
         x, y, z = item.p
@@ -122,4 +123,4 @@ class ItemHandler:
                 face.delete()
             item.shown[side] = False
         self.updateitem(item)
-        gc.collect
+        

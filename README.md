@@ -10,6 +10,7 @@ PyCraft is a recreation of Minecraft in Python 3 made with PyGame.
 * [Installing](#installing)
 * [Contributing/Issue Reporting](#contributingissuereporting)
 * [Todo](#todo)
+* [Controls](#controls)
 
 ## Installing
 
@@ -17,16 +18,16 @@ Download the latest [release](https://github.com/IAJWasTooShort/PyCraft/releases
 
 #### Or run it locally
 
-```console
+```sh
 $ git clone https://github.com/IAJWasTooShort/PyCraft.git
 ```
-```console
+```sh
 $ cd PyCraft
 ```
-```console
+```sh
 $ pip install -r requirements.txt
 ```
-```console
+```sh
 $ python3 main.py
 ```
 

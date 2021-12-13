@@ -142,7 +142,7 @@ class Scene:
             self.HEIGHT = h
         self.vertexList()
         glViewport(0, 0, w, h)
-        gc.collect
+
 
     def drawPanorama(self):
         # self.resizeCGL(256, 256, changeRes=False)

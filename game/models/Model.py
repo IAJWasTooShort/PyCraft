@@ -9,7 +9,7 @@ class Model:
 
     def addCube(self, x, y, z, w, h, d, texture):
         self.cubes.append((texture, x, y, z, w, h, d))
-        gc.collect
+        
 
     def drawModel(self, pos, rot):
         for i in self.cubes:
@@ -20,7 +20,7 @@ class Model:
             i[3] += pos[2]
 
             self.drawCube(*i)
-        gc.collect
+        
 
     def drawCube(self, texture, x, y, z, w=1, h=1, d=1):
         X, Y, Z = x + w, y + h, z + d
@@ -51,4 +51,4 @@ class Model:
 
         self.gl.stuffBatch.add(4, mode, texture[4], ('v3f', vertexes[5]),
                                tex_coords)  # top
-        gc.collect
+        

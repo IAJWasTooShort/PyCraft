@@ -13,7 +13,7 @@ class droppedItem:
 
     def addItem(self, coords, name, dr=True):
         self.items[len(self.items)] = [coords, name, randint(0, 2) / 10, [0, "-"], 0, dr]
-        gc.collect
+        
 
     def update(self):
         cpy = self.items.copy().items()
@@ -108,4 +108,4 @@ class droppedItem:
                 yy -= 0.1
             self.items[i[0]][0] = (i[1][0][0], yy, i[1][0][2])
             self.items[i[0]][4] = i[1][4]
-        gc.collect
+        

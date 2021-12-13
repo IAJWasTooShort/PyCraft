@@ -1,6 +1,4 @@
-from game.items.ItemHandler import ItemHandler
 from numpy.core.shape_base import block
-from game.blocks.droppedBlock import droppedBlock
 import math
 import os
 from random import randint
@@ -22,14 +20,14 @@ from game.entity.Player import Player
 from game.sound.BlockSound import BlockSound
 from game.sound.Sound import Sound
 from game.Scene import Scene
-from game.world.Biomes import getBiomeByTemp
+from game.world.Biomes import Biomes, getBiomeByTemp
 from game.world.worldGenerator import worldGenerator
 from settings import *
-
 
 import gc
 gc.enable()
 
+from sys import getrefcount
 
 working_dir = os.path.dirname(os.path.realpath(__file__))
 image_dir = os.path.join(working_dir, 'textures')
@@ -68,6 +66,7 @@ def respawn():
     player.lastPlayerPosOnGround = scene.startPlayerPos
     gc.collect
 
+
 def quitToMenu():
     global PAUSE, IN_MENU, mainFunction
 
@@ -98,6 +97,8 @@ def quitToMenu():
     player.playerDead = False
 
     mainFunction = drawMainMenu
+
+
     gc.collect
 
 def showSettings():
@@ -219,10 +220,8 @@ def drawDeathScreen(mc):
     bg.blit(0, 0)
 
     mp = pygame.mouse.get_pos()
-
     drawInfoLabel(scene, f"You died!", xx=scene.WIDTH // 2, yy=scene.HEIGHT - scene.HEIGHT // 4, style=[('', '')],
                   size=34, anchor_x='center')
-
     # Back to Game button
     respawnButton.x = scene.WIDTH // 2 - (respawnButton.button.width // 2)
     respawnButton.y = scene.HEIGHT // 2 - (respawnButton.button.height // 2) - 50
@@ -245,10 +244,8 @@ def pauseMenu(mc):
     bg.blit(0, 0)
 
     mp = pygame.mouse.get_pos()
-
     drawInfoLabel(scene, f"Game menu", xx=scene.WIDTH // 2, yy=scene.HEIGHT - scene.HEIGHT // 4, style=[('', '')],
                   size=12, anchor_x='center')
-
     # Back to Game button
     resumeButton.x = scene.WIDTH // 2 - (resumeButton.button.width // 2)
     resumeButton.y = scene.HEIGHT // 2 - (resumeButton.button.height // 2) - 50
@@ -264,7 +261,7 @@ def pauseMenu(mc):
     quitWorldButton.x = scene.WIDTH // 2 - (quitButton.button.width // 2)
     quitWorldButton.y = scene.HEIGHT // 2 - (quitButton.button.height // 2) + 50
     quitWorldButton.update(mp, mc)
-    
+
     pygame.display.flip()
     clock.tick(MAX_FPS)
     gc.collect
@@ -304,14 +301,14 @@ def drawMainMenu(mc):
     glFogf(GL_FOG_START, 0)
     glFogf(GL_FOG_END, 1000)
 
-    DiscordTried = 0
-    while DiscordTried == 0:
-        if DiscordRP == True:
-            if process_exists("discord.exe"):
-                RPC.update(state="On the Main Menu", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
-                DiscordTried = 1
-            else:
-                DiscordTried = 1
+    #DiscordTried = 0
+    #while DiscordTried == 0:
+    #    if DiscordRP == True:
+    #        if process_exists("discord.exe"):
+    #            RPC.update(state="On the Main Menu", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
+    #            DiscordTried = 1
+    #        else:
+    #            DiscordTried = 1
     scene.set3d()
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -331,7 +328,6 @@ def drawMainMenu(mc):
 
     tex = gui.GUI_TEXTURES["game_logo"]
     tex.blit(scene.WIDTH // 2 - (tex.width // 2), scene.HEIGHT - tex.height - (scene.HEIGHT // 15))
-
     drawInfoLabel(scene, f"PyCraft {VERSION} By IAJ", xx=10, yy=10, style=[('', '')], size=12)
 
     # Singleplayer button
@@ -379,7 +375,6 @@ print("Loading the game...")
 #if DiscordRP == True:
 #    RPC.connect()
 #    RPC.update(state="Loading PyCraft...", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
-
 
 resizeEvent = False
 LAST_SAVED_RESOLUTION = [WIDTH, HEIGHT]
@@ -641,9 +636,9 @@ mainFunction = drawMainMenu
 
 gc.collect
 
-
 while True:
 
+    gc.collect
     if scene.allowEvents["keyboardAndMouse"] and not PAUSE:
         if pygame.mouse.get_pressed(3)[0]:
             player.mouseEvent(1)
@@ -662,15 +657,15 @@ while True:
                     WIDTH = monitor.current_w
                     HEIGHT = monitor.current_h
                     screen = pygame.display.set_mode((monitor.current_w, monitor.current_h),
-                                                     pygame.DOUBLEBUF | pygame.OPENGL | pygame.RESIZABLE
-                                                     | pygame.FULLSCREEN)
+                                                    pygame.DOUBLEBUF | pygame.OPENGL | pygame.RESIZABLE
+                                                    | pygame.FULLSCREEN)
                     scene.resizeCGL(WIDTH, HEIGHT)
                     resizeEvent = True
                 else:
                     WIDTH = LAST_SAVED_RESOLUTION[0]
                     HEIGHT = LAST_SAVED_RESOLUTION[1]
                     screen = pygame.display.set_mode((WIDTH, HEIGHT),
-                                                     pygame.DOUBLEBUF | pygame.OPENGL | pygame.RESIZABLE)
+                                                    pygame.DOUBLEBUF | pygame.OPENGL | pygame.RESIZABLE)
                     scene.resizeCGL(WIDTH, HEIGHT)
                     resizeEvent = True
         if event.type == pygame.VIDEORESIZE:
@@ -711,6 +706,8 @@ while True:
                         player.inventory.activeInventory = 8
                     if event.key == pygame.K_p:
                         player.gm1()
+                    if event.key == pygame.K_F8:
+                        print("smth")
                     if event.key == pygame.K_F3:
                         showInfoLabel = not showInfoLabel
                     if event.key == pygame.K_F5:
@@ -736,6 +733,7 @@ while True:
                         player.mouseEvent(1)
                     else:
                         player.mouseEvent(-1)
+
     if scene.allowEvents["grabMouse"]:
         pygame.mouse.set_visible(PAUSE)
     else:
@@ -757,19 +755,18 @@ while True:
 
         player.inventory.draw()
         gui.update()
-
         if showInfoLabel:
             drawInfoLabel(scene, f"PyCraft {VERSION} By IAJ ({VERSION}/vanilla)\n"
-                                 f"{round(clock.get_fps())} fps\n"
-                                 f"\n"
-                                 f"XYZ: {round(player.x(), 3)} / {round(player.y(), 5)} / {round(player.z(), 3)}\n"
-                                 f"Block: {round(player.x())} / {round(player.y())} / {round(player.z())}\n"
-                                 f"Facing: {player.rotation[1]} / {player.rotation[0]}\n"
-                                 f"Biome: {getBiomeByTemp(scene.worldGen.perlinBiomes(player.x(), player.z()) * 3)}\n"
-                                 f"Looking at: {scene.lookingAt}\n"
-                                 f"Count of chunks: {scene.worldGen.start - len(scene.worldGen.queue)} "
-                                 f"({scene.worldGen.start})",
-                          shadow=False, label_color=(224, 224, 224), xx=3)
+                                f"{round(clock.get_fps())} fps\n"
+                                f"\n"
+                                f"XYZ: {round(player.x(), 3)} / {round(player.y(), 5)} / {round(player.z(), 3)}\n"
+                                f"Block: {round(player.x())} / {round(player.y())} / {round(player.z())}\n"
+                                f"Facing: {player.rotation[1]} / {player.rotation[0]}\n"
+                                f"Biome: {getBiomeByTemp(scene.worldGen.perlinBiomes(player.x(), player.z()) * 3)}\n"
+                                f"Looking at: {scene.lookingAt}\n"
+                                f"Count of chunks: {scene.worldGen.start - len(scene.worldGen.queue)} "
+                                f"({scene.worldGen.start})",
+                        shadow=False, label_color=(224, 224, 224), xx=3)
         pygame.display.flip()
         clock.tick(MAX_FPS)
     elif PAUSE and not IN_MENU:
@@ -785,4 +782,4 @@ while True:
         gui.update()
 
         mainFunction(mbclicked)
-    gc.collect
+    print(getrefcount(showInfoLabel))

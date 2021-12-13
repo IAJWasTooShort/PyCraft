@@ -21,4 +21,4 @@ class Explosion:
                             nexp.run()
 
                     self.gl.cubes.remove((nx, ny, nz))
-        gc.collect
+        
