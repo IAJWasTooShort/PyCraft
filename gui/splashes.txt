@@ -1,7 +1,2 @@
-PyCraft
-<<<<<<< HEAD
 By IAJ!
-Are there any farlands here!?!?!
-=======
-By IAJ!
->>>>>>> parent of 3ed3a6d (Update splashes.txt)
+Pycraft!
