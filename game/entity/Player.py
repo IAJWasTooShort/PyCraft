@@ -173,7 +173,11 @@ class Player:
 
     def jump(self):
         if not self.dy:
-            self.dy = 4
+            key = pygame.key.get_pressed()
+            if key[pygame.K_COMMA]:
+                self.dy = 100
+            else:
+                self.dy = 4
 
     def move(self, dt, dx, dy, dz):
         self.dy -= dt * self.gravity
@@ -336,7 +340,12 @@ class Player:
 
     def gm1(self):
         if self.item == "":
-            self.inventory.addBlock("dirt")
+            self.inventory.addBlock("log_oak")
+            self.inventory.addBlock("log_doak")
+            self.inventory.addBlock("log_spruce")
+            self.inventory.addBlock("nocolor")
+            self.inventory.addBlock("gravel")
+            self.inventory.addBlock("fire")
         else:
             self.inventory.addBlock(self.item)
 
