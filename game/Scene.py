@@ -194,7 +194,7 @@ class Scene:
 
     def updateScene(self):
 
-        self.genWorld()
+        #self.genWorld() #Continues to generate world (Laggy)
         if self.in_water:
             glFogfv(GL_FOG_COLOR, (GLfloat * 4)(0, 0, 0, 1))
             glFogf(GL_FOG_START, 10)
