@@ -124,7 +124,16 @@ class worldGenerator:
         treeHeight = random.randint(5, 7)
 
         for i in range(y, y + treeHeight):
-            self.add((x, i, z), 'log_oak')
+            if Biomes(getBiomeByTemp(self.perlinBiomes(x, z) * 3)) == "forest":
+                self.add((x, i, z), 'log_doak')
+            #elif Biomes(getBiomeByTemp(self.perlinBiomes(x, z) * 3)) == "mountains":
+            #    self.add((x, i, z), 'log_doak')
+            #elif Biomes(getBiomeByTemp(self.perlinBiomes(x, z) * 3)) == "desert":
+            #    self.add((x, i, z), 'log_doak')
+            elif Biomes(getBiomeByTemp(self.perlinBiomes(x, z) * 3)) == "taiga":
+                self.add((x, i, z), 'log_spruce')
+            else:
+                self.add((x, i, z), 'log_oak')
         for i in range(x + -2, x + 3):
             for j in range(z + -2, z + 3):
                 for k in range(y + treeHeight - 2, y + treeHeight):
