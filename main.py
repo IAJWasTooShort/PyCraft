@@ -1,3 +1,4 @@
+from turtle import update
 from numpy.core.shape_base import block
 import math
 import os
@@ -5,10 +6,12 @@ from random import randint
 import pyglet
 from OpenGL.GL import *
 from OpenGL.raw.GLU import gluOrtho2D
-
+import subprocess
+import gc
 from pypresence import Presence
 import time
 
+from sys import getrefcount
 from sys import exit
 
 from functions import drawInfoLabel, getElpsTime, translateSeed
@@ -24,10 +27,9 @@ from game.world.Biomes import Biomes, getBiomeByTemp
 from game.world.worldGenerator import worldGenerator
 from settings import *
 
-import gc
+
 gc.enable()
 
-from sys import getrefcount
 
 working_dir = os.path.dirname(os.path.realpath(__file__))
 image_dir = os.path.join(working_dir, 'textures')
@@ -39,6 +41,7 @@ pyglet.resource.reindex()
 
 programIcon = pygame.image.load('textures\pycraft-32.png')
 
+
 pygame.display.set_icon(programIcon)
 
 client_id = "851879525590630411"
@@ -46,7 +49,6 @@ RPC = Presence(client_id)
 
 DiscordOpen = False
 
-import subprocess
 
 def process_exists(process_name):
     call = 'TASKLIST', '/FI', 'imagename eq %s' % process_name
@@ -65,7 +67,6 @@ def respawn():
     player.position = scene.startPlayerPos
     player.lastPlayerPosOnGround = scene.startPlayerPos
     gc.collect
-
 
 def quitToMenu():
     global PAUSE, IN_MENU, mainFunction
@@ -97,7 +98,6 @@ def quitToMenu():
     player.playerDead = False
 
     mainFunction = drawMainMenu
-
 
     gc.collect
 
@@ -132,7 +132,6 @@ def startNewGame():
                 RPC.update(state="In Game", large_image="icon", large_text="PyCraft: Made By IAJ", buttons=[{"label": "PyCraft Github", "url": "https://github.com/IAJWasTooShort/PyCraft"}])
     gc.collect
 
-
 def pause():
     global PAUSE, mainFunction
     PAUSE = not PAUSE
@@ -141,7 +140,6 @@ def pause():
     mainFunction = pauseMenu
     gc.collect
 
-
 def deathScreen():
     global PAUSE, mainFunction
     PAUSE = not PAUSE
@@ -149,7 +147,6 @@ def deathScreen():
     scene.allowEvents["keyboardAndMouse"] = True
     mainFunction = drawDeathScreen
     gc.collect
-
 
 def drawSettingsMenu(mc):
     scene.set2d()
@@ -380,6 +377,7 @@ resizeEvent = False
 LAST_SAVED_RESOLUTION = [WIDTH, HEIGHT]
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.DOUBLEBUF | pygame.OPENGL | pygame.RESIZABLE)
+#screen = pygame.display.set_mode((0, 0), pygame.DOUBLEBUF | pygame.OPENGL |  pygame.FULLSCREEN)
 pygame.display.set_caption(f"PyCraft {VERSION} By IAJ")
 
 # Loading screen
@@ -764,7 +762,7 @@ while True:
                                 f"Facing: {player.rotation[1]} / {player.rotation[0]}\n"
                                 f"Biome: {getBiomeByTemp(scene.worldGen.perlinBiomes(player.x(), player.z()) * 3)}\n"
                                 f"Looking at: {scene.lookingAt}\n"
-                                f"Count of chunks: {scene.worldGen.start - len(scene.worldGen.queue)} "
+                                f"Chunks: {scene.worldGen.start - len(scene.worldGen.queue)} "
                                 f"({scene.worldGen.start})",
                         shadow=False, label_color=(224, 224, 224), xx=3)
         pygame.display.flip()
@@ -782,4 +780,4 @@ while True:
         gui.update()
 
         mainFunction(mbclicked)
-    print(getrefcount(showInfoLabel))
+    #print(getrefcount(showInfoLabel))
